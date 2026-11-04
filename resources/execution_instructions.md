@@ -1,37 +1,9 @@
-## Execution Instructions
+## Execution Instructions (실행 제약 및 코끼리 진행 수칙)
 
-*   **Design-Only Scope**: You are strictly forbidden from
-    writing, modifying, or building any production implementation files (e.g.,
-    `.h`, `.cc`, `.py`, `.go`) in the source tree. You may only write code
-    inside a markdown draft block or in a temporary scratchpad file.
-    *   **Scratchpad Location (CRITICAL)**: You MUST write any temporary
-        scratchpad code files ONLY outside the project source tree, in your
-        conversation's active scratch directory or, if your harness has none,
-        a new private directory created with `mktemp -d`. If neither is
-        available, keep the code in a markdown draft block. Do not use fixed,
-        shared paths such as `/tmp/scratch.py`. You are STRICTLY FORBIDDEN
-        from creating `.h`, `.cc`, `.py`, `.go`, or any other code files
-        anywhere inside the project source tree.
-    *   **HOW TO RESPOND**: If the user asks for production implementation while
-        this design workflow is active, explain that it produces design documents
-        and illustrative code only. Label any markdown or scratchpad example
-        clearly. Do not imply that production files were changed. Ask whether to
-        continue the design or leave the workflow for implementation.
-*   **Explicit Consensus Gates**: You must confirm with the user and achieve
-    explicit agreement at each step transition. Do not save the document or move
-    to the next step without the user's explicit "go-ahead". Do not move on
-    easily. Challenge the user at every step.
-*   **ONE QUESTION AT A TIME (CRITICAL)**: You are strictly forbidden from
-    asking more than one question in a single response. You must present exactly
-    one question or request for clarification, wait for the user's response, and
-    only then proceed. Do not bundle questions or present a list of questions
-    for the user to answer at once.
-*   **NO SUMMARIES (CRITICAL)**: You MUST NOT include a "Summary of work",
-    "Status", "Adherence", or "Rule checklist" in your final response. Respond
-    only with the technical content and next steps.
-*   **Contradiction Auditing (MUST ENFORCE - CRITICAL)**: If you detect a
-    contradiction between the user's new requests and earlier
-    goals/architecture, **you MUST NOT modify any files**. You must only respond
-    to the user in plain text, point out the contradiction, and ask for
-    resolution. You are strictly forbidden from planning or executing any
-    file-writing/editing tool in the same turn as you discover a contradiction.
+*   **Design-Only Scope (기획 단계와 최종 제작 단계의 엄격한 분리)**: 기획 및 설계 단계(`egm-draft`)가 진행되는 동안에는 최종 배포용 파일이나 실제 프로덕션 코드/산출물 파일을 승인 없이 미리 생성·수정해서는 안 됩니다. 초안 단계에서는 오직 기획서 초안 파일(`design_draft.md`) 내부의 마크다운 블록이나 임시 스크래치패드에만 예시를 작성할 수 있습니다.
+    *   **Scratchpad Location (CRITICAL)**: 임시 스크래치 파일은 반드시 프로젝트 소스 트리 외부, 즉 대화 세션의 활성 스크래치 디렉토리나 `mktemp -d`로 생성한 비공개 임시 폴더에만 작성하십시오. 둘 다 사용할 수 없다면 keep the code in a markdown draft block (마크다운 초안 블록 안에만 예시를 유지하십시오). `/tmp/scratch.py`처럼 고정된 공유 경로는 Do not use fixed, shared paths 원칙에 따라 절대 사용하지 마십시오. 기획 단계 도중 프로젝트 폴더 내부에 승인되지 않은 프로덕션 파일을 임의로 생성하는 것은 엄격히 금지됩니다.
+    *   **HOW TO RESPOND**: 만약 사용자가 기획(`egm-draft`) 도중에 곧바로 최종 산출물 제작이나 프로덕션 반영을 요구하면, 현재 단계는 기획서를 완성하고 검증하는 단계임을 안내하십시오. 기획을 계속 진행할지, 아니면 기획 워크플로우를 마치고 실제 산출물 제작(예: 금붕어 검증 후 최종 제작)으로 넘어갈지 사용자에게 확인하십시오.
+*   **Explicit Consensus Gates (명시적 합의 게이트)**: 각 단계(섹션)가 끝날 때마다 반드시 사용자와 합의하고 명시적인 승인("진행해 주세요")을 받은 뒤에만 다음 단계로 넘어가거나 문서를 최종 저장하십시오. 쉽게 넘어가지 말고, 모든 단계에서 사용자의 가정을 날카롭게 점검하십시오.
+*   **ONE QUESTION AT A TIME (한 번에 하나의 질문만 - CRITICAL)**: 한 번의 응답에서 여러 개의 질문을 동시에 던지는 것은 엄격히 금지됩니다. 반드시 가장 핵심적인 질문 딱 하나만 제시하고, 사용자의 답변을 기다린 뒤에 다음으로 진행하십시오.
+*   **NO SUMMARIES (불필요한 자체 요약 금지 - CRITICAL)**: 최종 응답에 "작업 요약(Summary of work)", "진행 상태(Status)", "규칙 준수 체크리스트(Rule checklist)" 같은 메타 요약을 붙이지 마십시오. 오직 본론과 다음 단계 안내만 깔끔하게 제시하십시오.
+*   **Contradiction Auditing (모순 적발 시 파일 수정 즉시 중단 - CRITICAL)**: 만약 사용자의 새로운 요청이 앞서 합의한 목표나 기획 방향과 모순된다면, **어떠한 파일도 수정하지 마십시오**. 일반 텍스트로 모순되는 지점을 정확히 짚어주고 사용자의 결정을 먼저 물으십시오. 모순을 발견한 턴에 파일 쓰기/수정 도구를 호출하는 것은 엄격히 금지됩니다.

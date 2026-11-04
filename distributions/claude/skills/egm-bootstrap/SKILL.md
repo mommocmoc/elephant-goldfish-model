@@ -2,70 +2,43 @@
 name: egm-bootstrap
 license: Apache-2.0
 disable-model-invocation: true
-description: Bootstrap directory README.md files across a repository subtree.
+description: >-
+  비즈니스용 코끼리-금붕어 모델(EGM-Biz)의 워크스페이스 맥락 지도 자동 구축 스킬입니다.
+  폴더 안에 흩어져 있는 기존 사업 문서, 마케팅 자료, 퍼스널 브랜딩 노트, 코드/데이터를 탐색하여
+  코끼리 에이전트가 사용자의 비즈니스 맥락을 단번에 이해할 수 있도록 폴더별 요약 문서(README.md)를 생성합니다.
 ---
 
-# EGM Peanuts and Hay Bootstrap (`egm-bootstrap`)
+# EGM Peanuts and Hay Bootstrap (`egm-bootstrap` — 내 비즈니스 맥락 지도 구축)
 
 When running in Codex or ChatGPT Work, first read [Codex integration](../../docs/codex.md).
 In Claude Code or Cowork, read `${CLAUDE_PLUGIN_ROOT}/docs/claude.md` first.
 
 ## Overview
 
-This skill automates the creation, correction, formatting, and correctness
-verification of Elephant-and-Goldfish Model (EGM) compliant `README.md` files
-across a directory tree. It establishes clear architectural contracts
-(interfaces, invariants, and side effects) for both human developers and AI
-assistants.
+이 스킬은 일반 사무직 실무자나 1인 비즈니스 운영자의 워크스페이스 폴더 트리를 탐색하여, **코끼리(Elephant) 에이전트가 사용자의 비즈니스 배경·기존 자산·브랜드 원칙을 즉시 파악할 수 있도록 표준화된 `README.md` 맥락 지도**를 자동으로 생성·보정·검증합니다.
 
-*   **Peanuts**: Leaf-level Component Package READMEs containing specific file
-    contracts.
-*   **Hay**: Parent-level Repository Blueprints that roll up child interface
-    contracts into high-altitude indexes.
+*   **Peanuts (말단 폴더 요약서)**: 개별 프로젝트, 캠페인, 상품, 또는 콘텐츠 폴더의 핵심 내용(제공 가치/산출물, 불변 원칙/브랜드 룰, 외부 발행 영향)을 담은 요약서입니다.
+*   **Hay (상위 폴더 블루프린트)**: 하위 폴더들의 요약을 하나로 묶어 비즈니스 전체의 지형도를 한눈에 보여주는 상위 인덱스 문서입니다.
 
 ## Delegation
 
-A Goldfish runs in a fresh context with no conversation history. Spawn each
-subagent with your harness's subagent tool (Antigravity: `invoke_subagent`; Claude Code: `Agent`; Codex: `spawn_agent`). Each subagent is defined in `agents/<file>.md`, and its
-frontmatter `name` (for example `egm-zoom-out`) is the subagent type to request
-where your harness registers named subagents. Otherwise spawn a general-purpose
-subagent and tell it to read that persona file first. Pass the prompt verbatim
-and wait for the report. If your harness cannot nest subagents,
-use direct dispatch instead of the synthesizer. See `docs/harnesses.md`.
-If your harness has no subagent tool, run the scout steps inline.
+금붕어 스카우트(Goldfish explorer)는 이전 대화 기록이 없는 깨끗한 컨텍스트에서 실행됩니다. 하네스의 서브에이전트 도구(Antigravity: `invoke_subagent`; Claude Code: `Agent`; Codex: `spawn_agent`)를 사용하여 호출하십시오. 각 서브에이전트는 `agents/<file>.md`에 정의되어 있으며, 명명된 서브에이전트를 지원하지 않는 환경에서는 범용 서브에이전트를 생성하고 해당 페르소나 파일을 먼저 읽도록 지시하십시오. 서브에이전트 중첩이 불가능하면 직접 병렬 호출을 사용하고(`docs/harnesses.md` 참조), 서브에이전트 도구가 아예 없다면 스카우트 단계를 인라인으로 실행하십시오.
 
 ## Inputs
 
-*   **`path`**: The target root directory path to bootstrap (Required).
-*   **`is_worker`**: Internal parameter. `true` if executing as a worker
-    Sub-Orchestrator (Optional, default: `false`).
-*   **`sub_tree_root`**: Internal parameter. The root path of the assigned
-    subtree partition (Optional).
-*   **`target_filename`**: Target contract filename to generate or update
-    (Optional, default: `"README.md"`). Supports alternate blueprint filenames
-    such as `"EGM.md"` when pre-existing human-maintained READMEs must not be
-    modified.
+*   **`path`**: 맥락 지도를 구축할 대상 루트 폴더 경로 (필수).
+*   **`is_worker`**: 내부 파라미터. 워커 서브 오케스트레이터로 실행 중이면 `true` (선택, 기본값: `false`).
+*   **`sub_tree_root`**: 내부 파라미터. 할당된 서브트리 루트 경로 (선택).
+*   **`target_filename`**: 생성하거나 업데이트할 요약 파일 이름 (선택, 기본값: `"README.md"`). 기존에 직접 관리 중인 `README.md`를 건드리고 싶지 않을 때 `"EGM.md"`나 `"CONTEXT.md"` 등으로 지정할 수 있습니다.
 
 ## Execution Constraints (CRITICAL)
 
-1.  **No Code Generation**: You are strictly limited to documentation. Do not
-    write or refactor any functional source code.
-2.  **VCS Isolation**: Do not perform any version control commits (`git commit`,
-    `git add`). All filesystem changes must be written locally using standard
-    file-writing tools. Tracking
-    and submitting is deferred to the human user.
-3.  **Temporary File Isolation**: Each worker keeps its status, checkpoint,
-    and log files in its own directory outside the workspace (host scratch or
-    `mktemp -d`), never a fixed, shared path. If neither exists, skip them.
-4.  **Tool Usage (CRITICAL)**: Use your shell, file-reading, file-writing, and file-editing tools for directory discovery and contract/README
-    generation. Adhere to clean Markdown formatting directly during generation
-    (standard headers, tables, and fenced code blocks). If a project markdown
-    formatter (e.g. `npx prettier --write`) is explicitly configured in the
-    repository, it may optionally be invoked.
-5.  **Subagent Delegation**: Spawn sub-orchestrator workers in parallel.
-6.  **Mandatory Safety Gate (CRITICAL)**: If you discover more than 15
-    subdirectories, you MUST immediately request user approval (using a structured question tool, if your harness has one, or plain chat) before proceeding with full-tree execution
-    or unbounded subagent spawning.
+1.  **No Code / Source Modification**: 오직 맥락 요약 문서(`README.md` 또는 `target_filename`)만 생성/수정하십시오. 원본 업무 문서, 원고, 데이터, 기능성 코드는 절대 건드리지 마십시오.
+2.  **VCS Isolation**: `git commit`, `git add` 같은 버전 관리 커밋을 임의로 실행하지 마십시오.
+3.  **Temporary File Isolation**: 각 워커는 상태, 체크포인트, 로그 파일을 워크스페이스 외부의 개별 디렉토리(호스트 스크래치 또는 `mktemp -d`)에 보관하며, never a fixed, shared path (절대 고정된 공유 경로를 사용하지 마십시오). If neither exists, skip them.
+4.  **Tool Usage (CRITICAL)**: 셸, 파일 읽기/쓰기/수정 도구를 사용하여 디렉토리를 탐색하고 깔끔한 마크다운(표준 헤더, 표, 코드 블록)으로 요약 문서를 작성하십시오.
+5.  **Subagent Delegation**: 서브 오케스트레이터 워커들을 병렬로 실행하십시오.
+6.  **Mandatory Safety Gate (CRITICAL)**: 하위 디렉토리가 **15개**를 초과하면, 전체 실행이나 대량 서브에이전트 생성 전에 반드시 사용자에게 승인 게이트를 제시하고 응답을 기다려야 합니다.
 
 ---
 
@@ -73,355 +46,102 @@ If your harness has no subagent tool, run the scout steps inline.
 
 ### Step 0: Ecosystem & Verification Discovery
 
-1.  Inspect the repository root for package/build manifests:
-    *   Node.js / TypeScript: `package.json` -> `npm test` (or `pnpm test` / `yarn test`)
+1.  루트 폴더에 검증이나 빌드 설정 파일이 있는지 확인합니다:
+    *   Node.js / TypeScript: `package.json` -> `npm test`
     *   Rust: `Cargo.toml` -> `cargo test`
     *   Go: `go.mod` -> `go test ./...`
     *   Python: `pyproject.toml` / `pytest.ini` / `setup.py` -> `pytest`
     *   C/C++ / Make: `Makefile` -> `make test`
     *   Bazel: `BUILD` / `BUILD.bazel` -> `bazel test //...`
-    *   None found: `<test-command>`
-2.  Record as `VerificationCommand` to populate generated README contracts.
+    *   일반 비즈니스 문서/노트 폴더(위 설정 없음): `<test-command>` (또는 수동/드리프트 검수 기준)
+2.  확인된 값을 `VerificationCommand`로 기록합니다.
 
 ---
 
 ### Step 1: Startup Branching Control
 
-1.  Check the `is_worker` input parameter.
-2.  If `is_worker` is `true`, jump directly to **Step 4: Sub-Orchestrator Worker
-    Flow** to process the assigned `sub_tree_root`.
-3.  If `is_worker` is `false` or unset, proceed as the Root Orchestrator to
-    **Step 2: Incremental Scoping & Safety Gate**.
+1.  `is_worker` 파라미터를 확인합니다.
+2.  `is_worker`가 `true`이면 즉시 **Step 4: Sub-Orchestrator Worker Flow**로 이동하여 할당된 `sub_tree_root`를 처리합니다.
+3.  `is_worker`가 `false`이거나 생략되었으면 루트 오케스트레이터로서 **Step 2: Incremental Scoping & Safety Gate**를 진행합니다.
 
 ---
 
 ### Step 2: Incremental Scoping & Safety Gate (Root Orchestrator)
 
-1.  **Incremental BFS Discovery**: Map the target `path` tree level-by-level
-    (BFS) using a directory queue, listing one directory level at a time. (CRITICAL: never run a recursive search such as `find` or `ls -R`.)
+1.  **Incremental BFS Discovery**: 대상 `path` 트리를 한 레벨씩 너비 우선 탐색(BFS)으로 파악합니다 (`find`나 `ls -R` 같은 전체 재귀 명령은 사용하지 마십시오).
+    *   심볼릭 링크 및 숨김/시스템 폴더(`.git`, `.antigravity`, `node_modules`, `venv`, `dist`, `build`, `third_party`)는 무시합니다.
+    *   `.gitignore` 및 `.egmignore` 패턴을 준수합니다.
 
-    *   Preserve intermediate folder nodes.
-    *   Ignore symbolic links to prevent infinite recursion.
-    *   Ignore hidden/system directories (`.git`, `.antigravity`, `node_modules`,
-        `venv`, `dist`, `build`, `third_party`).
-    *   Read `.gitignore` and `.egmignore` (if present) and ignore matching glob patterns.
-    *   Preserve package and build manifests (`package.json`, `Cargo.toml`,
-        `go.mod`, `pyproject.toml`, `Makefile`, `BUILD`) in the discovery map
-        to extract verification targets later.
+2.  **Safety Gate & Unbounded Spawning Approval (CRITICAL)**: 탐색 중 발견된 디렉토리 수가 **15개**를 초과하면 즉시 멈추고 사용자 승인을 요청합니다:
+    *   `question`: "The target directory tree contains more than 15 subdirectories. This is a large execution scope. Do you want to proceed with full-tree bootstrapping?"
+    *   `options`: `["Yes, proceed with full tree bootstrapping", "No, abort execution"]`
+    *   사용자의 응답을 받기 전에는 절대 진행하거나 워커를 생성하지 마십시오.
 
-2.  **Safety Gate & Unbounded Spawning Approval (CRITICAL)**: During the BFS
-    loop, if the total running count of discovered directories exceeds **15**,
-    immediately pause discovery and request user approval (using a structured question tool, if your harness has one, or plain chat) to warn the user and request approval
-    for full-tree execution:
+3.  **Bottom-up Post-Pruning Pass**: 매핑이 완료되면 말단에서 루트 방향으로 올라오며 빈 폴더나 단순 테스트 전용 폴더를 걸러냅니다:
+    *   *Recognized Business & Source Files (인식 대상 업무 문서 및 소스 파일)*:
+        - 비즈니스 기획·원고·노트 문서: `.md`, `.txt`, `.html` (단, 자동 생성할 `target_filename` 자체만 있는 경우는 제외하고 실제 업무 문서, 제안서, 카피 원고, 리서치 노트가 담긴 폴더를 포함)
+        - 구조화 데이터 및 설정: `.json`, `.yaml`, `.yml`, `.sql`, `.graphql`, `.prisma`
+        - 스크립트 및 코드 파일: `.py`, `.ts`, `.tsx`, `.js`, `.jsx`, `.sh`, `.go`, `.rs`, `.java`, `.kt`, `.c`, `.cc`, `.cpp`, `.h` 등
+    *   *Test Directory Exclusion*: 오직 테스트 파일(`tests`, `testing`, `testdata`, `*_test.*`, `*.spec.*`)만 담긴 폴더는 제외합니다.
+    *   *Empty Filtering*: 대상 파일도 없고 유효한 하위 폴더도 없는 빈 폴더는 제외합니다.
 
-    *   `question`: "The target directory tree contains more than 15
-        subdirectories. This is a large execution scope. Do you want to proceed
-        with full-tree bootstrapping?"
-    *   `options`: `["Yes, proceed with full tree bootstrapping",
-        "No, abort execution"]`
-    *   (CRITICAL: After requesting approval, you MUST wait for the user's
-        response before continuing or spawning any workers).
-    *   If the user selects abort, terminate execution immediately.
-
-3.  **Bottom-up Post-Pruning Pass**: Once mapping is complete (and approved),
-    walk the mapped tree bottom-up (leaves to root). Filter out non-code and
-    test-only directories:
-
-    *   *Source Code Files*: Files matching recognized source code, schema, and
-        contract extensions:
-        - Systems & Compiled: `.c`, `.cc`, `.cpp`, `.cxx`, `.h`, `.hh`, `.hpp`,
-          `.rs`, `.go`, `.zig`, `.lean`
-        - Managed & Enterprise: `.java`, `.kt`, `.scala`, `.cs`, `.fs`
-        - Scripting & Dynamic: `.py`, `.rb`, `.php`, `.lua`, `.sh`, `.bash`
-        - Web & Mobile: `.ts`, `.tsx`, `.js`, `.jsx`, `.mjs`, `.cjs`, `.swift`,
-          `.m`, `.dart`
-        - Data & Schemas / IDLs: `.sql`, `.proto`, `.graphql`, `.gql`,
-          `.thrift`, `.prisma`
-        - Infrastructure / Declarative Code: `.tf`, `.hcl`, `.cue`
-        (Excludes build manifests, lockfiles, test fixtures, documentation, and
-        generic data dumps like `.csv`, `.tsv`, `.parquet`).
-    *   *Test Directory Exclusion*: Exclude directories containing exclusively
-        test code (e.g. named `tests`, `testing`, `testdata`, or containing only
-        files matching `*_test.*`, `*Test.*`, `test_*.*`, or `*.spec.*`).
-    *   *Non-Code Filtering*: Exclude any directory that contains no source code
-        files AND contains no subdirectories with code. Retain empty
-        intermediate folders only if they have child directories that contain
-        code.
-
-4.  Calculate the total count of pruned directories and maximum depth. Proceed
-    to **Step 3: Execution Strategy Selection**.
+4.  유효 디렉토리 총개수와 최대 깊이를 계산한 뒤 **Step 3**로 이동합니다.
 
 ---
 
 ### Step 3: Execution Strategy Selection (Root Orchestrator)
 
 1.  **Direct Execution Strategy (Directory Count <= 5)**:
-
-    *   If the total count of pruned directories is 5 or fewer, execute the bottom-up
-        documentation directly in the current thread.
-    *   Jump to **Step 4: Sub-Orchestrator Worker Flow** (treating the Root
-        Orchestrator as the worker for the entire `path`), and then proceed to
-        **Step 5: Root Compilation & Termination**.
+    *   대상 디렉토리가 5개 이하이면 현재 스레드에서 직접 **Step 4** 및 **Step 5**를 순차 수행합니다.
 
 2.  **Unbounded Parallel Subagent Swarm Strategy (Directory Count > 5)**:
-
-    *   (CRITICAL: If Directory Count > 15, you MUST verify that you have
-        received explicit user approval before proceeding. If not yet approved,
-        request approval immediately and wait for the user's response before
-        spawning workers).
-    *   Partition the discovery map into independent subtree branches using the
-        **Adaptive Depth Partitioning Algorithm**:
-        1.  Set `depth = 1`.
-        2.  Extract directory nodes from the discovery map located at the
-            current `depth`.
-        3.  If the count of nodes at `depth` is between 3 and 5: select these
-            nodes as subtree partition roots.
-        4.  If the count of nodes at `depth` < 3: increment `depth` (up to a max
-            of 3) and repeat step 2.
-        5.  If the count of nodes at `depth` > 5: group the largest branches (by
-            total nested folder count) into 3-4 separate partitions, combine the
-            remaining small branches into a single fallback partition subtree,
-            and select these as partition roots.
-        6.  Fallback: If `depth` reaches 3 and count is still < 3, select the
-            immediate children of the root (or fall back to sequential
-            execution).
-    *   **Spawn Unbounded Sub-Orchestrators**: For each partition subtree root,
-        use your harness's subagent tool to spawn a parallel worker:
-        *   Subagent: `egm-bootstrap-orchestrator` (`agents/bootstrap_orchestrator.md`) (or a general-purpose subagent)
-        *   `Prompt`: "Run egm-bootstrap with path=`[path]`,
-            is_worker=true, sub_tree_root=`[partition_root]`,
-            target_filename=`[target_filename]`."
-    *   **Unbounded Execution**: Spawn all Sub-Orchestrators in parallel without
-        artificial concurrency limits (as authorized by the user during the
-        safety gate).
-    *   Go idle and wait for all worker subagents to return their JSON subtree
-        index payloads. Jump to **Step 5: Root Compilation & Termination**.
+    *   (디렉토리가 15개를 초과한 경우 반드시 사용자 승인을 먼저 확인하십시오.)
+    *   트리를 3~5개의 서브트리 파티션으로 나누어 각각의 파티션 루트에 대해 병렬 워커 서브에이전트(`egm-bootstrap-orchestrator`, `agents/bootstrap_orchestrator.md`)를 실행합니다:
+        *   `Prompt`: "Run egm-bootstrap with path=`[path]`, is_worker=true, sub_tree_root=`[partition_root]`, target_filename=`[target_filename]`."
+    *   모든 워커가 JSON `subtree_index` 페이로드를 반환할 때까지 대기한 후 **Step 5**로 이동합니다.
 
 ---
 
 ### Step 4: Sub-Orchestrator Worker Flow
 
-1.  **Scout Registration**: Use a read-only `goldfish-explorer` scout. Where your harness supports defining subagents at runtime, register it with:
-
+1.  **Scout Registration**: 읽기 전용 `goldfish-explorer` 스카우트를 사용합니다. 런타임 서브에이전트 정의를 지원한다면 다음과 같이 등록합니다:
     *   `name`: `goldfish-explorer`
-    *   `description`: `Read-only codebase explorer scout.`
-    *   `system_prompt`: >- You are a read-only codebase explorer. Your task is
-        to analyze the source files in the target directory and return a
-        concise, factual summary. Do not write or modify any files. Return a
-        JSON object containing the directory's public symbols (interface),
-        invariants, and side effects matching schema: {"interface": [],
-        "invariants": [], "side_effects": []}. Never infer RPC methods,
-        routes, status enums, or invariants from file or directory names
-        alone; cite the exact `[file:symbol_or_flag]` for every entry, and
-        output `["None"]` if no explicit invariants or side effects exist in
-        code.
+    *   `description`: `Read-only workspace and codebase explorer scout.`
+    *   `system_prompt`: >- You are a read-only workspace and codebase explorer. Your task is to analyze the business documents, content assets, or source files in the target directory and return a concise, factual summary. Do not write or modify any files. Return a JSON object containing the directory's key deliverables/public symbols (interface), core business/brand rules or invariants (invariants), and external channels/side effects (side_effects) matching schema: {"interface": [], "invariants": [], "side_effects": []}. Never guess facts from file or directory names alone; cite the exact `[file:section_or_symbol]` for every entry, and output `["None"]` if no explicit invariants or side effects exist.
     *   `enable_write_tools`: `false`
     *   `enable_subagent_tools`: `false`
 
-2.  **Post-Order Traversal**: Walk the assigned `sub_tree_root` (or `path`) in
-    post-order (deepest leaves first). For each directory `D`:
+2.  **Post-Order Traversal**: 할당된 `sub_tree_root`를 가장 깊은 말단 폴더부터 역순(Post-order)으로 순회합니다. 각 디렉토리 `D`에 대해:
+    *   **Correction & Modification Policy**: `D`에 이미 `target_filename`(기본값 `README.md`)이 존재한다면 **기존 내용을 통째로 덮어쓰지 마십시오**. 기존 내용을 읽고 작성자의 메모와 설명을 보존하면서, `goldfish-explorer` 스카우트가 추출한 실제 파일 내용과 병합하여 EGM 표준 구조(`Interface`, `Invariants`, `Side Effects`)에 맞게 보정·업데이트하십시오.
+    *   **Scout Spawning**: `D` 안의 파일들을 약 1,500라인 단위 청크로 나누어 `goldfish-explorer`를 실행하고 결과를 병합합니다.
+    *   **Parent Context Propagation**: 상위 폴더 `P`를 처리할 때는 직계 하위 폴더들의 요약 정보를 프롬프트 컨텍스트로 전달합니다.
+    *   **Directory Classification & Template Generation**:
+        *   **Component Package (Peanut)**: `D`에 직접적인 업무 문서나 소스 파일이 있는 경우 **Component Package README Template**을 사용합니다.
+        *   **Repository Blueprint (Hay)**: `D`에 직접 파일은 없고 하위 폴더들만 있는 경우 **Intermediate Blueprint README Template**을 사용합니다.
+        *   **Link Formatting Policy (CRITICAL)**: 하위 폴더 및 형제 파일 링크는 반드시 **실제로 존재하는 파일**에 대한 유효한 상대 경로(예: `./child/${target_filename}` 또는 `./child/SKILL.md`)만 사용하십시오. 존재하지 않는 파일에 대한 추측성 링크를 절대 만들지 마십시오.
 
-    *   **Correction & Modification Policy**: Check if `target_filename` (default:
-        `README.md`) already exists in `D`.
-
-        *   If `target_filename` exists, **do not overwrite it completely**. Instead,
-            read its existing content.
-        *   *Scout Scan Requirement*: Whether `target_filename` exists or not,
-            **always scan** the source code using the `goldfish-explorer` scout
-            for `D` to compile the true code symbol boundary.
-        *   *Legacy Extraction & Correction*: If `target_filename` exists, call the
-            reasoning LLM with prompt: > "Analyze the following unstructured
-            documentation content. Extract all public symbol names, classes,
-            interfaces, invariants, and side effects. Format your response
-            strictly as a JSON object matching the following schema: {
-            \"interface\": string[], \"invariants\": string[], \"side_effects\":
-            string[] }." Merge these extracted symbols with the scout's code
-            symbols. Use your file-editing tool (or your file-writing tool) to correct
-            and update the existing contract file to be EGM compliant while preserving
-            developer notes and descriptions.
-
-    *   **Scout Spawning & Constraints**: Spawn `goldfish-explorer` for `D`.
-
-        *   *Scout Constraints*: No per-directory or per-file byte cap; every
-            non-test file in `D` is read in full. Bound each scout call to
-            about **1,500 lines** of source instead: list top-level definitions
-            (class/func/def/route/flag lines) with your search tool, cut the
-            directory's files into chunks at those boundaries (never mid-body;
-            small files share a chunk), spawn one `goldfish-explorer` per
-            chunk in parallel, and merge their JSON. Give each chunk the
-            file's imports and top-level definition list so it can judge
-            visibility. Check build-manifest deps and `import` / `#include`
-            statements before attributing an RPC service, schema, or message
-            type to a local file. Read non-test files in this order:
-            1.  Contracts, schemas, and build manifests (`.h`, `.hh`, `.hpp`,
-                `.proto`, `.graphql`, `.gql`, `.thrift`, `.prisma`, `.sql` DDL,
-                interface classes); extract exact DDL table names and exported
-                build targets.
-            2.  Module entry points (`main.*`, `index.*`, `lib.*`, `mod.*`,
-                `__init__.py`, or files matching directory name), then
-                production source/query files alphabetically.
-            3.  Templates and configs: up to 200 lines each (800 in config-only
-                directories); exclude `.css`/`.scss`.
-            4.  Test files (`*_test.*`, `*Test.*`, `test_*.*`, `*.spec.*`):
-                ignore entirely, including in hybrid directories.
-        *   *Child Fault Tolerance*: If the scout fails or times out, log a
-            warning, use placeholder values `["(Details pending/documentation
-            failed)"]`, and continue execution.
-
-    *   **Parent Context Propagation**: When processing a parent directory `P`,
-        retrieve the compiled interface summaries of its immediate child
-        subdirectories.
-
-        *   *Propagation Heuristics*:
-            1.  If the child was documented during this run, retrieve its public
-                interface directly from the in-memory execution cache.
-            2.  If the child was corrected/modified (Correction Policy), use the
-                merged legacy extraction symbols.
-        *   Pass these child symbol blocks as prompt context when invoking `P`'s
-            explorer scout.
-
-    *   **Verification Command Target Lookup**: Populate the Verification section
-        using the discovered `VerificationCommand`.
-        *   If the project uses Bazel/BUILD files: check if a `BUILD` file exists
-            in `D` or the nearest ancestor, referencing `bazel test` / `bazel build`
-            with valid target patterns (`//[package_path]/...` or
-            `//[package_path]:all`, never `//[package_path]...` or
-            `//[package_path]:...`). Use `bazel run` for interactive runner
-            targets.
-        *   If the project uses other manifests (`package.json`, `Cargo.toml`,
-            `go.mod`, `pyproject.toml`, `Makefile`), populate with the corresponding
-            test runner command.
-        *   If no verification command is identified, omit or use a placeholder.
-
-    *   **Directory Classification & Template Generation**: Generate or correct
-        `target_filename` using your file-writing tool or your file-editing tool based on
-        `D`'s classification.
-
-        *   **Component Package (Peanut)**: `D` contains direct source code
-            files. Use the **Component Package README Template**. (If it also
-            has child subdirectories, include relative links to their contracts
-            in the Interface section).
-        *   **Repository Blueprint (Hay)**: `D` contains no direct source code
-            files, but contains subdirectories with code contracts. Use the
-            **Intermediate Blueprint README Template**.
-        *   **Link Formatting Policy (CRITICAL)**: Package contract files must use a
-            hybrid link formatting approach to balance portability and clarity:
-            1.  **Relative Links to Existing Files Only**: Use relative paths
-                (e.g., `./child/${target_filename}` or `../sibling/${target_filename}`) for child
-                contracts and sibling file references within the same codebase
-                subsystem. (CRITICAL: Only generate `[Child](./child/${target_filename})`
-                links for child directories that exist in the pruned
-                `subtree_index` and contain an actual `${target_filename}`. If a child
-                directory contains a `SKILL.md` or other non-contract asset, link
-                directly to `./child/SKILL.md` or format it as an unlinked
-                bullet point. Never output speculative links to non-existent
-                contract files).
-            2.  **Absolute Links**: Use standard URLs or repository paths
-                for referencing files outside the package subsystem (e.g.,
-                cross-package dependencies).
-
-    *   **Markdown Formatting**: Immediately after writing or correcting
-        `target_filename` in `D`, ensure clean markdown formatting (valid headers,
-        tables, and code fences). If a project markdown formatter (e.g. `npx prettier --write`)
-        is configured in the repository, you may execute it on `target_filename`.
-
-3.  **Worker Reporting**: Once the assigned subtree is fully traversed, compile
-    the `subtree_index` array containing the `path`, `summary`, `interface`,
-    `invariants`, and `side_effects` for every processed directory.
-
-4.  If `is_worker` is `true`, read the [Worker Return Interface Schema](references/worker-return.schema.json)
-    relative to this skill directory, then return a matching JSON payload to
-    the Root Orchestrator and terminate. If
-    `is_worker` is `false` (sequential mode), proceed directly to **Step 5: Root
-    Compilation & Termination**.
+3.  **Worker Reporting**: 순회가 끝나면 모든 처리된 디렉토리의 `path`, `summary`, `interface`, `invariants`, `side_effects`를 담은 `subtree_index` 배열을 구성합니다.
+4.  `is_worker`가 `true`이면 [Worker Return Interface Schema](references/worker-return.schema.json) 형식에 맞춰 JSON을 반환하고 종료합니다. `false`이면 **Step 5**로 진행합니다.
 
 ---
 
 ### Step 5: Root Compilation & Termination (Root Orchestrator)
 
-1.  **Receive Worker Payloads**: Collect the JSON `subtree_index` payloads
-    returned by all parallel Sub-Orchestrators.
-
-    *   **Root Fault Tolerance**: If a parallel worker fails or times out, log a
-        warning, insert a placeholder warning link (`[Subtree Root]
-        (Documentation failed / Subagent execution timeout)`) in the root
-        Blueprint's subdirectory index, and complete the remaining compilation.
-        (Worker failures leaving partial files are handled as an incremental
-        progress feature; the Correction Policy allows resuming on subsequent
-        runs).
-
-2.  **Intermediate Directory Documentation**: Identify any intermediate
-    directories sitting between the root `path` and the partitioned subtree
-    roots.
-
-    *   Process these intermediate directories sequentially bottom-up.
-    *   Generate Intermediate Blueprint contract files using the compiled summaries
-        returned by the workers.
-    *   Ensure clean formatting and valid relative links for each Intermediate
-        Blueprint contract file.
-
-3.  **Root Directory Documentation**: The target root `path` of the execution is
-    *always* classified as the **Repository Root (Blueprint / Hay)**.
-
-    *   Check if `target_filename` already exists in `path`. If present, apply the
-        **Correction & Modification Policy** to read and retain the existing
-        title, metadata, and architectural overview at the top of the root
-        contract file.
-    *   Check if `path` itself contains any direct source files. If present,
-        spawn a `goldfish-explorer` scout for `path` to extract local symbols
-        and invariants, appending them under the optional `## Local Interface &
-        Invariants` section.
-    *   Compile the final root `target_filename` using the **Repository Root Blueprint
-        Template**, rolling up all top-level subdirectory boundaries. Ensure any
-        root architecture or sequence diagrams strictly match the synchronous /
-        asynchronous boundaries, operation names, and storage backends in the
-        child `subtree_index` payloads without inventing unverified nodes.
-    *   Write the root `target_filename` using your file-writing tool.
-
-4.  **Final Correctness Verification (CRITICAL)**: You MUST perform a final
-    verification pass across ALL created and modified contract files in the
-    `subtree_index` (including all child package contracts like `pkg1/${target_filename}`
-    and `pkg2/${target_filename}`) as a correctness check before concluding work. You
-    MUST explicitly read every single created or modified contract file
-    to verify its content. Do not skip any child contract files. Verify:
-
-    *   **EGM Compliance & Code Grounding**: Ensure `Interface`, `Invariants`,
-        and `Side Effects` sections exist, cite real code symbols/flags/tables
-        from the scout extraction, and contain zero speculative or unverified
-        claims.
-    *   **Markdown Syntax**: Ensure clean headers, valid tables, and proper code block fences.
-    *   **Valid & Resolvable Links (CRITICAL)**: Ensure all subdirectory and
-        sibling links use valid relative paths (`./subdir/${target_filename}` or
-        `./subdir/SKILL.md`), and explicitly verify that every referenced target
-        file actually exists on the filesystem. Remove or correct any broken
-        relative references.
-    *   **Valid Targets**: Verify verification targets match project test
-        configuration and use valid target syntax (for Bazel, `/...` or
-        `:all`, never `:...`).
-
-5.  **Optional Drift Review (CRITICAL)**: After verification, ask the user (using
-    a structured question tool, if your harness has one, or plain chat) to offer running a drift report
-    on the generated documentation updates:
-
-    *   `question`: "Do you want to run the EGM Drift Report on the generated
-        contract updates to check for consistency with the codebase?"
-    *   `options`: `["(Recommended) Yes, run drift report on modified contracts",
-        "No, skip drift review"]`
-    *   If the user selects "Yes", run the `egm-drift-report` skill targeting
-        the modified contracts to verify both missing code coverage and
-        doc-to-code hallucinations (verifying every documented method, route,
-        enum, database table, and invariant against local source files and
-        recording discrepancies in the drift report for human triage). (Note:
-        While `egm-drift-report` is often used for design documents, it can be
-        applied to EGM-compliant contracts as a variant).
-
-6.  Terminate execution successfully.
+1.  **Receive Worker Payloads**: 병렬 워커들의 `subtree_index` 결과를 수집합니다.
+2.  **Intermediate Directory Documentation**: 루트와 파티션 사이의 중간 폴더들을 바텀업으로 문서화합니다.
+3.  **Root Directory Documentation**: 최상위 `path`에 대해 **Repository Root Blueprint Template**을 사용하여 전체 비즈니스/워크스페이스 맥락 지도를 완성합니다.
+4.  **Final Correctness Verification (CRITICAL)**: 생성되거나 수정된 **모든 요약 파일(`README.md`)을 빠짐없이 직접 다시 읽고** 다음을 최종 검증하십시오:
+    *   **EGM Compliance & Fact Grounding**: `Interface`, `Invariants`, `Side Effects` 섹션이 존재하며 실제 파일 내용에 근거하고 있는지 확인.
+    *   **Markdown Syntax**: 깔끔한 헤더, 표, 코드 블록 문법 확인.
+    *   **Valid & Resolvable Links (CRITICAL)**: 모든 상대 경로 링크의 대상 파일이 실제로 디스크에 존재하는지 확인하고 깨진 링크는 즉시 수정/제거.
+5.  **Optional Drift Review (CRITICAL)**: 검증 완료 후 사용자에게 생성된 맥락 지도에 대해 드리프트 검사를 실행할지 묻습니다:
+    *   `question`: "Do you want to run the EGM Drift Report on the generated contract updates to check for consistency with the codebase?"
+    *   `options`: `["(Recommended) Yes, run drift report on modified contracts", "No, skip drift review"]`
+    *   "Yes" 선택 시 `egm-drift-report`를 실행하여 요약 문서와 실제 파일 간의 정합성을 최종 점검합니다.
+6.  성공적으로 실행을 종료합니다.
 
 ---
 
 ## Templates
 
-Before writing any contract file, read the
-[README templates](references/templates.md) relative to this skill directory.
-It defines the **Component Package (Peanuts)**, **Repository Root (Blueprint /
-Hay)**, and **Intermediate Blueprint** README templates referenced above.
+요약 파일을 작성하기 전에 반드시 이 스킬 폴더 기준 [README templates](references/templates.md)를 읽고 **Component Package (Peanuts)**, **Repository Root (Blueprint / Hay)**, **Intermediate Blueprint** 템플릿 구조를 준수하십시오.

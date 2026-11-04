@@ -1,39 +1,25 @@
-# Feature Specification Standard
+# Feature Specification Standard (비즈니스 기획·캠페인·브랜딩 명세 표준)
 
-This standard defines the quality bar for high-level feature specifications
-before implementation begins.
+이 표준은 실제 산출물 제작(제안서, 랜딩페이지 카피, 상세페이지, 퍼스널 브랜딩 콘텐츠 등)에 들어가기 전, 상위 **비즈니스 기획 및 전략 명세(Strategy & Spec)**가 갖추어야 할 품질 기준을 정의합니다.
 
-## Core Principle
+## Core Principle (핵심 원칙)
 
-A feature specification passes if a competent engineer (or fresh AI session) who
-is unfamiliar with the codebase can understand the proposed feature, the
-business motivation, and the design trade-offs, and confirm that all major risks
-and alternatives have been addressed.
+좋은 비즈니스 기획 명세서는 **이 비즈니스나 프로젝트의 사전 배경지식이 전혀 없는 외부인(잠재 고객, 협업 파트너, 심사위원, 또는 새로운 AI 세션)**이 읽었을 때도 무엇을 왜 제안하는지, 타겟 독자/고객이 누구인지, 어떤 대안들을 비교했는지, 그리고 주요 리스크가 어떻게 방어되었는지 100% 명확히 이해하고 납득할 수 있어야 통과됩니다.
 
-## The Alternatives Rule
+## The Alternatives Rule (대안 비교의 원칙 - 필수)
 
-The specification must include a **mandatory evaluation of alternatives**. It
-fails this standard if it proposes a single path without proving that other
-viable designs were considered and rejected for specific, documented reasons
-(including, but not limited to, complexity, cost, performance, or scalability).
-Rejection rationales must state concrete technical or scope trade-offs and must
-not attribute a rejection to a maintainer without linking their issue,
-discussion, or PR.
+기획서는 반드시 **실질적인 대안들의 비교 평가(Alternatives Considered)**를 포함해야 합니다. 다른 선택지들을 검토해 보지도 않고 단 하나의 방식만 정답인 것처럼 제시하는 기획서는 이 표준을 통과할 수 없습니다. 왜 다른 대안(예: 다른 타겟층, 다른 가격대, 다른 채널, 다른 메시지 앵글)을 기각했는지 구체적인 비즈니스적 이유(비용, 시간 리소스, 타겟 적합성, 전환율 한계 등)를 명시해야 합니다. 작성자의 판단으로 기각한 경우 `Rejected by author: [구체적 기각 사유]` 형태로 기록하며, 실제 출처 링크 없이 타인(팀장, 클라이언트 등)의 결정인 것처럼 임의로 꾸며내지 마십시오.
 
-## Risks & Limits
+## Risks & Limits (리스크 및 한계 명시)
 
-The specification must explicitly call out its own constraints. It must identify
-potential failure modes, security implications, scalability limits, and how they
-will be mitigated.
+기획서는 스스로의 한계와 현실적인 제약 조건을 숨기지 않고 드러내야 합니다. 예상되는 실패 시나리오(고객 무반응, 리소스 부족, 일정 지연, 법적/심의 이슈 등)와 이를 어떻게 예방하거나 완화(Mitigate)할 것인지 구체적인 대책을 명시해야 합니다.
 
-## Requirements (Non-Exhaustive Examples)
+## Requirements (필수 포함 항목)
 
-The specification must detail these areas if applicable to the changes:
+비즈니스 기획 명세서는 다음 영역을 구체적으로 다루어야 합니다:
 
-*   **Problem Statement**: The business or user problem being solved.
-*   **Goals & Non-Goals**: What the feature will and will not deliver.
-*   **Proposed Architecture**: Component layout, data flows, and ecosystem
-    integration.
-*   **Alternatives Considered**: Rejected options and rationale for rejection.
-*   **Risks & Mitigations**: Identified security, scalability, or complexity
-    risks.
+*   **Problem Statement (핵심 문제 및 고객 페인포인트)**: 해결하려는 비즈니스 문제 또는 타겟 고객/독자가 겪고 있는 구체적인 불편함과 결핍.
+*   **Goals & Non-Goals (목표 및 비목표/제외 범위)**: 이 기획을 통해 달성할 측정 가능한 목표(KPI)와, 리소스 집중을 위해 **이번에는 절대 하지 않기로 선을 그은 범위(Non-Goals)**.
+*   **Proposed Strategy & Value Proposition (핵심 전략 및 가치 제안)**: 타겟 오디언스 정의, 핵심 메시지/오퍼(Hook-Story-Offer), 채널 및 전환 퍼널 구조.
+*   **Alternatives Considered (검토했으나 기각한 대안들)**: 고려했던 다른 옵션들과 각각의 기각 사유.
+*   **Risks & Mitigations (리스크 및 대응 방안)**: 예산, 시간, 시장 반응, 운영 측면의 리스크와 플랜B.

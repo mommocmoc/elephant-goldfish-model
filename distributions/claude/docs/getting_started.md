@@ -1,152 +1,86 @@
-# EGM Setup & Workflow Guide
+# EGM-Biz 시작 가이드 및 비즈니스 워크플로우 (Setup & Workflow Guide)
 
-## Background
+## Background: 왜 '코끼리'와 '금붕어'인가요?
 
-The **Elephant-Goldfish Model (EGM)** is an implementation of Spec-Driven
-Development (SDD) based on Dave Rensin's foundational article
-[Elephants, Goldfish, and the New Golden Age of Software Engineering](https://medium.com/@drensin/elephants-goldfish-and-the-new-golden-age-of-software-engineering-c33641a48874).
+**코끼리-금붕어 모델(Elephant-Goldfish Model, EGM)**은 원래 Dave Rensin의 아티클 [Elephants, Goldfish, and the New Golden Age of Software Engineering](https://medium.com/@drensin/elephants-goldfish-and-the-new-golden-age-of-software-engineering-c33641a48874)에서 출발한 방법론입니다. **EGM-Biz**는 이 강력한 원리를 **일반 사무직 실무자, 마케터, 기획자, 그리고 1인 비즈니스 운영자**의 업무 환경에 맞게 재설계한 프레임워크입니다.
 
-A general recommendation: start with the core philosophy before diving into the
-tools. Going through the conversational sequence once or twice, especially if
-you are unfamiliar with LLMs, will expose you to LLM quirks and develop your
-intuition for using them.
+혼자 일하는 1인 사업가나 바쁜 실무자가 기획서, 제안서, 마케팅 카피, 퍼스널 브랜딩 콘텐츠를 만들 때 겪는 가장 큰 문제는 **"내 머릿속에만 있는 맥락(암묵지)"**입니다:
+* 나는 내 상품과 상황을 너무 잘 알기 때문에 설명을 생략합니다.
+* 나와 몇 시간째 대화한 AI(코끼리)도 그 맥락을 공유하고 있어서 내 글이 완벽하다고 칭찬합니다.
+* 하지만 정작 **아무 맥락을 모르는 고객, 투자/정부지원 심사위원, 타 부서 의사결정자, 외주 작업자(금붕어)**가 그 결과물을 처음 보았을 때는 *"무슨 말인지 모르겠다", "왜 사야 하는지 안 와닿는다", "구체적으로 어떻게 작업하라는 건지 모르겠다"*는 반응이 나옵니다.
 
-If you do nothing else with EGM, do that a few times to see if you're getting
-better responses out of the LLMs than you were before. Other than your time,
-it's free, you don't have to install anything, and the instructions are labeled
-1 to N.
-
-If you like what that's doing for you, you'll start to notice some things. You
-won't like copy-pasting your prompts all the time. You'll see some repetition
-and wish the LLM could just do steps 1 to X on its own. The EGM framework is a
-result of that. A bunch of people that practiced it for a while noticed some
-emerging patterns and tried to make it easier to get started with fewer steps.
+EGM-Biz는 이 문제를 해결하기 위해 AI를 두 가지 역할로 쪼개어 운영합니다:
+1. 🐘 **코끼리 (Elephant)**: 당신의 비즈니스 히스토리, 기존 자산, 현실적 제약 조건을 모두 이해하고 기억하며 함께 기획서와 산출물을 작성하는 파트너.
+2. 🐠 **금붕어 (Goldfish)**: 이전 대화 기록이 **완전히 삭제된(Zero-Context)** 채로 소환되어, 오직 작성된 문서만 읽고 처음 보는 독자·고객·비평가의 시선에서 이해도, 수익성, 본질, 팩트, 문장력을 검증하는 6명의 냉혹한 리뷰어.
 
 ## Runtime Setup
 
-The EGM skills and personas are packaged as a plugin for **Antigravity**, **Claude Code**, **Claude Cowork**, **OpenAI Codex**, and **ChatGPT Work** (see [Harnesses](harnesses.md) for installation instructions).
+EGM-Biz의 스킬과 페르소나는 **Antigravity**, **Claude Code**, **Claude Cowork**, **OpenAI Codex**, **ChatGPT Work**에서 플러그인으로 작동합니다(설치 방법은 [Harnesses](harnesses.md) 참조).
 
-1.  **Skills**: The skills in `skills/` can be installed via the plugin/extension
-    manifest. This guide shows their commands without a prefix (e.g.
-    `/egm-brainstorm`, `/egm-draft`, `/egm-review`); see
-    [Try your first design](../README.md#try-your-first-design) for how to
-    invoke them in Antigravity (agy CLI), Claude Code, and Codex, such as the
-    `/egm:` prefix.
-2.  **Personas**: The prompts in `agents/` define isolated system instructions
-    for subagents.
+1.  **Skills (`skills/`)**: 기획 브레인스토밍부터 초안 작성, 무맥락 검증, 산출물 정합성 감사까지 이어지는 워크플로우 명령어입니다(예: `/egm:egm-brainstorm`, `/egm:egm-draft`, `/egm:egm-review`, [Try your first design](../README.md#try-your-first-design) 참조).
+2.  **Personas (`agents/`)**: 격리된 컨텍스트에서 실행되는 6종의 비즈니스 금붕어 서브에이전트 프롬프트입니다.
 
-## Main Workflow
+## Main Workflow: 맥락 발굴부터 실제 산출물 제작까지
 
-While EGM has a "main workflow", this process is not a prescription. The skills
-are designed to be fluid. You can and should reach for them out of order if that
-suits your needs.
+EGM-Biz의 최종 목표는 단순히 '기획을 위한 기획서'를 쓰는 것이 아니라 다음 두 가지를 얻는 것입니다:
 
-The general goal is to have:
+*   **누가 읽어도 단번에 설득되고 즉시 작동하는 실제 비즈니스 산출물** (사업기획서/제안서, 랜딩페이지/상세페이지 카피, 뉴스레터/콜드메일, 퍼스널 브랜딩 아티클 등)
+*   **내가 왜 이런 의사결정과 전략을 선택했는지 기록된 마스터 기획서** (추후 리퍼포징 및 외주/협업 위임의 기준점)
 
-*   Code that does what you want
-*   Documentation that explains why the code exists the way it does
+아주 간단한 이메일 답장이나 단순 메모를 쓸 때는 이 과정을 거칠 필요가 없습니다. **중요한 제안서, 신규 캠페인 런칭, 핵심 세일즈 카피, 내 이름을 건 퍼스널 브랜딩 콘텐츠**처럼 타인을 설득하고 결과를 내야 하는 순간에 원하는 스킬을 꺼내 쓰세요.
 
-You may find yourself going back and forth between skills to solve your problem
-at hand, and this is encouraged. Do not forcibly use the design-first process if
-you believe you can one-shot a simple bug fix. Use the right tool for the job.
+### Core Loop (핵심 5단계 루프)
 
-Use whichever skill serves your immediate bottleneck.
+1.  **`/egm-brainstorm` (코끼리 심층 인터뷰 + 6대 금붕어 아이디어 검증)**:
+    막연한 아이디어를 던지면 코끼리가 타겟 고객, 페인포인트, 가용 시간/예산, 제외 범위(Non-Goals), 필요한 최종 산출물을 날카롭게 질문합니다. 가설이 정리되면 6마리 금붕어 무리가 동시에 반론(과잉 기획 여부, 수익성/리소스 병목, 3초 이해도 등)을 제기하여 탄탄한 기획 브리프(`concepts_brief.md`)를 만들어 줍니다.
 
-### Core Loop
+2.  **`/egm-draft` (마스터 기획서 및 상세 산출물 명세 작성)**:
+    `concepts_brief.md`를 바탕으로 `docs/designs/` 아래에 들어갈 마스터 기획서(`design_draft.md`)를 섹션별로 당신과 합의하며 작성합니다. 특히 마지막 섹션(`## Detailed Implementation Plan`)에는 **실제로 제작할 최종 산출물 파일 목록과 각 파일에 들어갈 세부 목차, 헤드라인, 팩트, 오퍼, CTA**를 빈틈없이 설계합니다.
 
-The "core" workflow looks like:
+3.  **`/egm-review` (금붕어 5단계 무맥락 검증 — 가장 중요한 단계!)**:
+    이전 대화를 전혀 모르는 금붕어들이 마스터 기획서를 읽고 5단계 검증을 수행합니다:
+    *   **Stage 5 (Zoom Out)**: 80/20 본질에서 벗어난 과잉 기획이나 기존 자산 미활용 점검
+    *   **Stage 6 (Comprehension — 요약 복창 테스트)**: **아무 맥락 없는 금붕어가 문서를 읽고 "이 문서는 ~을 제안합니다"라고 스스로 요약 복창**합니다. 내가 의도한 맥락이 타인에게 똑같이 전달되는지 확인하는 가장 확실한 방법입니다.
+    *   **Stage 7 (Critic Review)**: 수익성/리소스(`egm-design`), 구조(`egm-structural`), 카피/설득력(`egm-style`) 정밀 비평
+    *   **Stage 8 (Intermediate Zoom Out)**: 수정 후 큰 그림 재점검
+    *   **Stage 9 (Implementation Readiness)**: 이 문서만 보고 즉시 최종 산출물을 100% 완성할 수 있는지 검증
 
-1.  **`/egm-brainstorm`**: Start an upstream ideation session. This command
-    prompts the developer to clarify the concept, then spawns a 6-lens Goldfish
-    swarm to stress-test the concept and generate a structured `concepts_brief.md`
-    artifact.
+4.  **Resolve & Approve (피드백 취사선택 및 확정)**:
+    금붕어는 의도적으로 많은 피드백을 쏟아냅니다. `/egm-resolve`를 통해 코끼리와 함께 타당한 지적만 골라 반영(`auto accept` 또는 항목별 선택)하고 불필요한 지적은 기각하세요. 최종 결정권은 항상 당신에게 있습니다.
 
-2.  **`/egm-draft`**: Drafts a design doc. This command turns a concept brief or
-    initial idea into a formal markdown design doc under `docs/designs/`, section
-    by section.
+5.  **Produce Deliverables (실제 비즈니스 산출물 제작)**:
+    검증이 완료된 마스터 기획서를 바탕으로 코끼리에게 **"기획서의 Detailed Implementation Plan에 따라 실제 산출물 파일들을 제작해 줘"**라고 지시하세요. 이미 모든 맥락, 수치, 구조, 카피 방향이 금붕어 검증을 거쳐 확정되어 있으므로, 한 번에 압도적인 퀄리티의 최종 산출물(제안서 본문, 랜딩페이지 카피, 상세페이지 기획안, 링크드인/뉴스레터 원고 등)이 쏟아져 나옵니다.
 
-3.  **`/egm-review`**: Reviews a design with **Goldfish**. Performs a
-    multi-stage review of a design doc in a fresh, zero-context session to
-    validate its completeness, clarity, self-containment, and readiness.
+## Drift Detection (기획 의도 vs 실제 산출물 정합성 점검)
 
-    This will provide *a lot* of feedback by design. Take what you think is
-    relevant. Ignore the rest.
+최종 산출물을 여러 개 제작하거나 시간이 지나며 수정하다 보면, 처음 기획서에서 합의했던 핵심 수치, 가격 조건, 브랜드 원칙이 슬그머니 빠지거나 왜곡될 수 있습니다:
 
-4.  **Human Review**: Send a Pull Request with your design to another human. EGM
-    does not replace human oversight, but encourages it. Human reviews are
-    essential for ensuring long-term product consistency and prioritization.
+*   **`/egm-drift-report`**: 기획서(`docs/designs/`) 또는 브랜드 가이드(`README.md`)와 실제 제작된 산출물 파일들을 대조하여 누락된 핵심 메시지나 수치 불일치를 자동으로 잡아냅니다.
 
-5.  **Implement**: Tell AI to build to the plan. The instructions on how to
-    implement it should be in your design doc. If the LLM makes a minor mistake,
-    feel free to fix it yourself, or ask the LLM to make point fixes. If it is
-    wildly off, update the design doc and try again.
+## Bootstrapping Existing Workspaces (내 비즈니스 맥락 지도 만들기)
 
-    > NOTE: Every team is going to have different skills that are relevant to
-    > their implementation phase. Readability and style guides, profiling tools,
-    > testing strategies, etc. EGM is not opinionated here. Add your skills to
-    > your implementation plan!
+### 추천 폴더 구조
 
-## Drift Detection
-
-To ensure that your design specifications and active codebase remain
-synchronized over time, EGM provides a drift detection skill:
-
-*   **`/egm-drift-report`**: Scan your design directory and referenced code for
-    drift. Any detected divergence should be reconciled. Either update the doc,
-    or the code. Human picks which.
-
-We recommend running this once per week. If you have a regular maintenance
-rotation, incorporating this as a weekly ritual is useful.
-
-## Bootstrapping Existing Codebases
-
-### Structure
-
-We recommend EGM project directories look something like this:
+1인 사업가나 실무자의 업무 워크스페이스는 다음과 같이 구성하는 것을 추천합니다:
 
 ```text
-path/to/project
-├── _agents/                   # (optional, but recommended)
+path/to/workspace
+├── _agents/                   # (선택) 내 비즈니스 전용 코끼리 컨텍스트 스킬
 │   └── skills
-│       └── <project>_elephant # Custom skill to load project context.
+│       └── my_biz_elephant
 │           └── SKILL.md
-└── docs/
-    └── designs/               # EGM design directory
-        ├── SITEMAP.md         # An index of design artifacts
-        └── FEATURE.md         # A detailed design specification
+├── docs/
+│   └── designs/               # 마스터 기획서 및 캠페인 설계도 보관소
+│       ├── SITEMAP.md         # 전체 기획서 인덱스
+│       └── Q4_LAUNCH.md       # 검증 완료된 마스터 기획서
+└── deliverables/              # 실제 제작된 최종 산출물 (제안서, 카피, 포스팅)
 ```
 
-### Bootstrapping
+### Bootstrapping (`/egm-bootstrap`)
 
-`/egm-bootstrap <path/to/project>` automatically generates, formats, and
-performs a first-pass verification of READMEs across a directory tree to
-establish codebase context. Humans should still review this output. It does this
-using a bottom-up, recursive summarization process:
+기존에 작업해 둔 기획서, 원고, 브랜드 노트, 리서치 파일들이 폴더마다 흩어져 있다면 `/egm-bootstrap <폴더경로>`를 실행하세요. 하위 폴더부터 최상위 루트 폴더까지 올라오며 각 폴더에 어떤 자산과 원칙이 담겨 있는지 요약한 `README.md` 맥락 지도를 자동으로 만들어 줍니다:
 
-1.  **Leaf Directories**: For each leaf directory, generate a `README.md` that
-    explains the directory's purpose and documents the function of each file.
+1.  **말단 폴더 (Peanuts)**: 각 프로젝트/캠페인 폴더의 핵심 산출물, 브랜드 불변 원칙(Invariants), 발행 채널을 요약합니다.
+2.  **상위 폴더 & 루트 (Hay)**: 하위 요약들을 묶어 내 비즈니스 전체의 지형도를 한눈에 볼 수 있는 블루프린트를 완성합니다.
 
-2.  **Parent Directories**: Move up the tree recursively, generating parent
-    `README.md` files by summarizing the subdirectories' READMEs.
-
-3.  **Root Directory**: Compile the root `README.md` to provide a complete,
-    high-level map of the system's architecture.
-
-The structured context hierarchy lets Elephants navigate codebases more easily.
-EGM prefers humans having control of these outputs, which is why this skill
-exists. If all of your design artifacts already reference all the code, READMEs
-may be unnecessary.
-
-### Project Context Skill (Optional)
-
-You can create a custom `<project>-elephant` skill specifically for your
-project. This skill does not need to be complicated. It should tell the LLM
-about your project, and give it links to the context you think is most relevant.
-That's all.
-
-This skill can be a handy way to give LLMs references to code paths, documents,
-and important designs quickly.
-
-As your codebase grows and more design documents are archived, this context
-loader allows the Elephant to retrieve relevant architectural history, enabling
-more informed design discussions and precise feature implementations.
+이렇게 한 번 맥락 지도를 만들어 두면, 다음번에 새로운 기획이나 콘텐츠를 만들 때 코끼리가 내 기존 비즈니스 자산과 톤앤매너를 즉시 100% 이해한 상태에서 출발할 수 있습니다.

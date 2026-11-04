@@ -1,37 +1,28 @@
-# Re-Implementation Standard
+# Re-Implementation Standard (업무 인수인계 및 산출물 재현 표준)
 
-This standard defines the quality bar for documenting codebase state.
+이 표준은 기존의 비즈니스 운영 방식, 브랜드 가이드, 콘텐츠 제작 프로세스, 또는 업무 매뉴얼(SOP)을 문서화할 때의 품질 기준을 정의합니다.
 
-## Core Principle
+## Core Principle (핵심 원칙)
 
-A document passes if a competent engineer (or fresh AI session) who is
-unfamiliar with the codebase can write functionally identical code on the first
-attempt using *only* the document, without guessing or making independent design
-choices.
+좋은 문서는 **이 비즈니스를 전혀 모르는 신규 담당자, 외주 작업자, 또는 새로운 AI 세션**이 *오직 이 문서만 보고도* 추가 질문이나 눈치 보기, 임의의 판단 없이 첫 시도에 기존과 동일한 수준의 업무나 산출물을 그대로 재현(Re-implement)할 수 있어야 통과됩니다.
 
-## The Zero-Assumption Rule
+## The Zero-Assumption Rule (추측 제로의 원칙)
 
-The document fails if the reader must guess parameter defaults, assume error
-handling, choose design patterns, or infer output schemas. Every behaviorally
-significant contract must be explicit.
+독자가 기본 설정값을 추측해야 하거나, 예외 상황 처리 방식을 스스로 판단해야 하거나, 산출물의 양식과 톤앤매너를 어림짐작해야 한다면 그 문서는 불합격입니다. 결과물의 품질과 직결되는 모든 규칙과 기준은 명시적으로 적혀 있어야 합니다.
 
-## Scope of Detail
+## Scope of Detail (상세화 범위)
 
-*   **Include**: External contracts (APIs, formats, side-effects), behavioral
-    rules (logic, state, errors), and performance constraints.
-*   **Exclude**: Syntax (loops, variable names), internal code organization
-    (private helpers), and non-observable structures (internal collections).
+*   **Include (반드시 포함할 것)**: 대외적 약속 및 산출물 규격(포맷, 채널, 발행 영향), 핵심 의사결정 및 작성 규칙(논리 흐름, 브랜드 금칙어, 예외 대응), 리소스/일정 제약 조건.
+*   **Exclude (제외할 것)**: 본질과 무관한 개인적 잡담이나 불필요한 사족.
 
-## Requirements (Non-Exhaustive Examples)
+## Requirements (필수 기록 항목)
 
-Document these areas if applicable to the codebase scope:
+업무나 자산의 성격에 맞게 다음 영역들을 명확히 문서화하십시오:
 
-*   **APIs**: Signatures, types, and expected behavior.
-*   **Logic**: Control flow, algorithms, and validation.
-*   **Data**: Schemas, serialization, and state transitions.
-*   **Side Effects**: Database writes, network calls, logging, and metrics.
-*   **Dependencies**: System integrations and libraries.
-*   **Configuration**: Flags, parameters, and hooks.
-*   **Constraints**: Hardcoded limits and assumptions.
-*   **Errors**: Edge cases, empty states, and retries.
-*   **Tests**: Test helpers and mocks (if documenting tests).
+*   **Outputs & Interfaces (산출물 및 접점)**: 최종 제공되는 결과물 형태, 타겟 독자, 기대 반응.
+*   **Core Workflow & Logic (핵심 진행 절차 및 논리)**: 단계별 업무 흐름, 판단 기준, 검수 규칙.
+*   **Templates & Data (양식 및 데이터 구조)**: 필수 입력 정보, 파일 양식, 보관 위치.
+*   **Side Effects & External Channels (외부 발행 및 파급 효과)**: 실제 고객 발송 여부, SNS/웹사이트 게시, 결제/정산 등 되돌리기 어려운 외부 영향.
+*   **Dependencies (필수 도구 및 연관 자료)**: 사용하는 상용 툴, 참조해야 할 원본 노션/문서/데이터.
+*   **Brand Rules & Constraints (브랜드 원칙 및 절대 제약)**: 반드시 지켜야 할 톤앤매너, 법적 고지, 절대 하지 말아야 할 금기 사항.
+*   **Exception Handling (예외 및 클레임 대처)**: 일정 지연, 고객 불만, 오류 발생 시의 대응 매뉴얼.

@@ -3,65 +3,46 @@ name: egm-drift-report
 license: Apache-2.0
 disable-model-invocation: true
 description: >-
-  Runs drift detection on all design documents to check for document and
-  code consistency. Produces an actionable report with differences. Use when the
-  user asks to detect drift or check for consistency across all design documents
-  or READMEs in a directory.
+  비즈니스용 코끼리-금붕어 모델(EGM-Biz)의 기획-산출물 정합성 감사(Drift Detection) 스킬입니다.
+  마스터 기획서(또는 브랜드/업무 가이드 README)와 실제 제작된 비즈니스 산출물(제안서, 랜딩페이지 카피,
+  상세페이지, 퍼스널 브랜딩 콘텐츠 등)을 대조하여 누락된 핵심 메시지, 숫자 불일치, 방향 이탈을 찾아냅니다.
 ---
 
-# Detect Drift In Designs and Code
+# Detect Drift In Designs and Deliverables (기획 의도 vs 실제 산출물 정합성 감사)
 
 When running in Codex or ChatGPT Work, first read [Codex integration](../../docs/codex.md).
 In Claude Code or Cowork, read `${CLAUDE_PLUGIN_ROOT}/docs/claude.md` first.
 
-When the user asks to detect drift across all designs or a set of READMEs, the
-goal is to identify all instances where the codebase has diverged or failed to
-implement the specifications described by those designs or READMEs.
+사용자가 기획서 디렉토리나 맥락 문서(`README.md`)와 실제 제작된 산출물 사이의 드리프트(Drift, 방향 이탈 및 불일치) 감지를 요청할 때 사용합니다. 마스터 기획서에서 합의했던 핵심 가치, 오퍼 조건, 수치, 타겟 메시지가 실제 산출물(제안서 본문, 카피 원고, 포스팅 등)을 만드는 과정에서 누락되거나 왜곡되지 않았는지 전수 조사합니다.
 
-1.  **Check Input**: Verify a directory containing design documents or READMEs
-    is provided. If not provided, ask the user to specify the target directory.
-2.  **List Documents**: List all files in the design directory.
-3.  **Analyze**: For EACH design document:
+1.  **Check Input**: 기획서나 기준 문서(`README.md`)가 담긴 디렉토리 경로가 제공되었는지 확인합니다. 없다면 사용자에게 대상 디렉토리를 물어봅니다.
+2.  **List Documents**: 해당 기획 디렉토리 내의 모든 기준 문서를 나열합니다.
+3.  **Analyze**: 각 기획서/기준 문서에 대해 다음을 수행합니다:
 
-    *   **Contextualize**: Read the design document. Identify the intent,
-        proposed changes, and specific filenames/symbols mentioned.
-    *   **Locate Source**: Find the corresponding source code files in the
-        source tree. If paths aren't explicit, use code search or grep to
-        locate the relevant classes, functions, or API endpoints mentioned in
-        the doc. Prompt the user to add missing links to the document to make
-        future detection cheaper.
-    *   **Verify**: Read the current state of those source files.
-    *   **Detect Drift**: Compare the design vs. reality. Look specifically for:
-        *   Missing Features: Logic described in the doc but absent in the code.
-        *   Incomplete Models: Dataclasses/Classes/Structs/Protos missing fields
-            specified in the design.
-        *   Logic Shortcuts: Hardcoded values where dynamic logic was planned.
-        *   Architectural Divergence: Implementation using different
-            patterns/libraries than proposed.
-    *   **Filter**: Report ONLY the differences. Do not describe what is working
-        or what matches. If the code matches the design perfectly, output "No
-        drift detected."
+    *   **Contextualize (기획 의도 파악)**: 기획서를 읽고 핵심 목표, 타겟 오디언스, 합의된 오퍼/가격/수치, 그리고 생성하기로 명시된 산출물 파일 경로/항목을 파악합니다.
+    *   **Locate Deliverables / Source (실제 산출물 파일 찾기)**: 워크스페이스에서 대응하는 실제 산출물 파일(또는 운영 문서/코드)을 찾습니다. 경로가 명시되어 있지 않다면 키워드 검색(grep)으로 관련 파일을 찾고, 향후 감사를 쉽게 하도록 문서에 링크 추가를 권고합니다.
+    *   **Verify (현재 산출물 상태 읽기)**: 실제 산출물 파일들의 최신 내용을 직접 읽습니다.
+    *   **Detect Drift (기획 vs 실제 산출물 괴리 적발)**: 기획서와 실제 산출물을 비교하여 다음 항목을 중점적으로 잡아냅니다:
+        *   **Missing Features / Claims (핵심 요소 누락)**: 기획서에 명시된 핵심 셀링 포인트, 고객 사례, 근거 자료, 필수 섹션, 또는 행동 유도(CTA)가 실제 산출물에서 빠진 경우.
+        *   **Incomplete Specs / Numbers (수치·조건 불일치)**: 가격, 할인율, 일정, 보장 조건, 스펙 항목이 기획서와 다르게 적혔거나 누락된 경우.
+        *   **Message Shortcuts (메시지 부실화)**: 구체적으로 설명하기로 한 고객 변화(Before & After)나 차별점을 산출물에서 추상적인 한 줄로 대충 넘어간 경우.
+        *   **Strategic / Tone Divergence (전략 및 톤앤매너 이탈)**: 합의된 브랜드 보이스, 타겟 설정, 설득 구조와 다른 방향으로 작성된 경우.
+    *   **Filter**: **오직 차이점(불일치 및 누락)만 보고하십시오.** 잘 일치하는 부분은 길게 설명하지 마십시오. 만약 기획서와 실제 산출물이 완벽히 일치한다면 `"No drift detected."`라고 출력합니다.
 
-4.  **Report**: Produce a single report listing all discrepancies found.
+4.  **Report**: 발견된 모든 불일치 사항을 하나의 리포트 파일로 생성합니다.
 
-    *   Append the analysis for each file to `{YYYY-MM-DD}_DRIFT_REPORT.md`
-        using your file-writing tool.
+    *   파일 쓰기 도구를 사용하여 `{YYYY-MM-DD}_DRIFT_REPORT.md` 파일에 분석 결과를 기록합니다.
     *   Strict Format:
 
         ```markdown
         ## <DESIGN_DOC_NAME>
 
-        <Bulleted list of specific divergences found>
-        <Or "No drift detected">
+        <발견된 구체적인 불일치/누락 항목 불릿 리스트 (한국어)>
+        <또는 "No drift detected">
         ```
 
 5.  **Guidance**
 
-    -   Be rigorous. If a design doc mentions a specific object, field or file
-        name and the code doesn't have it, that is a reportable drift. Double
-        check for coverage. If there is some part of the logic that is not
-        referenced in a design or README, this is a reportable drift.
-    -   Read files liberally to ensure you are looking at the current state
-        of the code, not relying on memory.
-    -   Process the files sequentially to ensure the tool output buffer doesn't
-        overflow.
+    -   철저하게 대조하십시오. 기획서에서 만들기로 한 산출물 파일, 섹션, 수치, 핵심 약속이 실제 결과물에 없다면 모두 보고 대상입니다. 반대로 실제 산출물에 기획서나 브랜드 가이드에 전혀 근거가 없는 내용이 임의로 들어간 경우에도 보고하십시오.
+    -   기억에 의존하지 말고 반드시 실제 파일들을 직접 읽어서 최신 상태를 확인하십시오.
+    -   출력 버퍼가 넘치지 않도록 파일을 순차적으로 하나씩 처리하십시오.

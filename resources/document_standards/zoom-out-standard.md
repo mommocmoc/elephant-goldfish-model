@@ -1,60 +1,36 @@
-# Zoom Out Standard
+# Zoom Out Standard (거시적 본질 및 미니멀리즘 표준)
 
-This standard defines the quality bar for evaluating high-level designs,
-architectures, and implementation plans from a high-altitude perspective.
+이 표준은 비즈니스 기획서, 마케팅/세일즈 캠페인 전략, 퍼스널 브랜딩 설계, 그리고 실행 계획을 거시적(High-Altitude) 관점에서 평가하기 위한 품질 기준을 정의합니다.
 
-## Core Principle
+## Core Principle (핵심 원칙)
 
-A design passes if it solves the root problem in the simplest possible way,
-leverages existing infrastructure and codebase conventions, avoids premature
-optimization or speculative features (YAGNI), and maintains appropriate
-abstraction boundaries without getting bogged down in low-level code
-implementation details.
+좋은 기획은 **가장 단순하고 확실한 방법으로 핵심 비즈니스 문제(Root Problem)를 해결**하며, 이미 보유한 자산(기존 콘텐츠, 고객 데이터, 검증된 템플릿, 상용 노코드 툴)을 최대한 재활용하고, 아직 일어나지도 않은 일을 대비한 과잉 기획(YAGNI)을 피하며, 전략 파트에서 지엽적인 실무 디테일에 매몰되지 않는 기획입니다.
 
-## 0. Context Sufficiency (Prerequisite Check)
+## 0. Context Sufficiency (맥락 충분성 - 필수 전제 조건)
 
-*   **Understanding the Objective**: The document must contain enough
-    information to define the overall objective. If the reviewer cannot
-    determine *what* we are trying to achieve and *why*, the review must fail
-    immediately with a request for context.
+*   **Understanding the Objective (목적과 배경의 명확성)**: 문서를 처음 읽는 사람도 *무엇을(What)* *왜(Why)* 하려는지 명확히 알 수 있어야 합니다. 만약 리뷰어가 문서를 읽고도 최종 목표나 비즈니스적 이유를 파악할 수 없다면, 즉시 맥락 보충을 요구하며 실패(Blocker) 처리해야 합니다.
 
-## 1. Root Problem Focus
+## 1. Root Problem Focus (근본 문제 집중)
 
-*   **Symptom vs. Root Cause**: The design must solve the underlying problem,
-    not just apply a local band-aid to symptoms.
-*   **Project Alignment**: The design must align with the high-level goals and
-    architectural philosophy defined in the project's root documentation
-    (`README.md` or `context.md`).
+*   **Symptom vs. Root Cause (표면적 증상 vs 근본 원인)**: 기획은 단순한 겉치레나 일시적 처방(예: "조회가 안 나오니 일단 인스타 릴스를 매일 올리자")이 아니라, 진짜 근본 문제(예: "타겟 고객이 누구인지, 어떤 문제를 해결해 주는지 핵심 오퍼가 불명확함")를 해결해야 합니다.
+*   **Project & Brand Alignment (비즈니스/브랜드 방향성 정렬)**: 제안된 기획은 프로젝트나 1인 비즈니스의 최상위 목표 및 브랜드 철학(`README.md` 또는 `context.md`)과 일치해야 합니다.
 
-## 2. Simplicity & Extensibility
+## 2. Simplicity & Extensibility (단순성 및 확장성 - 80/20 법칙)
 
-*   **YAGNI (You Aren't Gonna Need It)**: Reject abstractions, code paths, or
-    features built solely for speculative future requirements.
-*   **Premature Optimization**: Avoid introducing complexity (caching, sharding,
-    async queues) before performance bottlenecks are proven.
-*   **Minimalist Data Flow**: Ensure data passes through the minimal number of
-    components.
-*   **No Architectural Dead-Ends**: Use clean interfaces and boundaries to allow
-    future expansion without blocking it, without implementing speculative
-    features now.
+*   **YAGNI (You Aren't Gonna Need It / 과잉 기획 배제)**: 당장 검증되지도 않은 미래를 위해 불필요하게 복잡한 상품 라인업, 다채널 동시 런칭, 과도한 시스템 구축을 벌이는 것을 거부하십시오.
+*   **Premature Optimization (섣부른 자동화/확장 경계)**: 핵심 메시지와 오퍼에 대한 시장 반응이 검증되기도 전에 복잡한 자동화 파이프라인이나 대규모 확장 구조부터 짜는 것을 피하십시오.
+*   **Minimalist Customer/Work Flow (최소 동선 원칙)**: 고객이 가치를 경험하기까지의 단계(Funnel)나 실무자가 산출물을 내기까지의 단계가 최소한으로 단순해야 합니다.
+*   **No Strategic Dead-Ends (자산화 가능성)**: 일회성 소모로 끝나지 않고, 향후 다른 콘텐츠나 세일즈 자산으로 재가공(One-Source Multi-Use)하거나 확장할 수 있도록 깔끔한 구조를 유지하십시오.
 
-## 3. Anti-Weeds (Altitude Control)
+## 3. Anti-Weeds (고도 유지 및 지엽적 매몰 방지)
 
-*   **Premature Detail**: High-level sections must focus on architecture,
-    interfaces, and data flows, not code-level implementation details (e.g.,
-    helper functions or loop variables).
-*   **Workarounds vs. Structural Fixes**: Avoid complex local workarounds;
-    propose changes to the root component if that is cleaner.
-*   **Right Placement (Architectural Fit)**: Ensure new logic is placed in the
-    correct layer/component according to separation of concerns.
+*   **Premature Detail (섣부른 지엽적 디테일)**: 상위 전략 및 기획 섹션(Overview, Problem, Strategy)에서는 핵심 타겟, 가치 제안, 채널 전략, 전환 흐름에 집중해야 합니다. 세부 문구 토씨나 지엽적인 포맷 디테일은 하위 '상세 실행 및 산출물 명세(Detailed Implementation Plan)' 섹션에서 다루어야 합니다.
+*   **Workarounds vs. Structural Fixes (임시방편 vs 구조적 해결)**: 억지스러운 미사여구로 기획의 구멍을 메우려 하지 말고, 오퍼나 타겟 정의 자체를 명확히 고치십시오.
+*   **Right Placement (적재적소 배치)**: 각 내용(전략, 대안 비교, 세부 산출물 명세)이 문서의 올바른 섹션에 위치해야 합니다.
 
-## 4. Leverage Existing
+## 4. Leverage Existing (기존 자산 및 검증된 툴 레버리지)
 
-*   **Codebase Reuse**: Search the codebase and reuse existing utilities,
-    classes, or modules instead of reinventing them. Ensure the candidate for
-    reuse is stable, maintained, and does not violate dependency boundaries.
-*   **Pattern Consistency**: Follow established design patterns in the codebase.
-*   **Platform Standards**: Use established ecosystem frameworks and standard libraries
-    instead of bespoke or ad-hoc custom solutions.
-*   **Identify Anti-Patterns**: Actively flag known anti-patterns
-    (e.g., bypassing standard authentication, hardcoding deployment configurations).
+*   **Asset Reuse (기존 자산 재활용)**: 워크스페이스 내 기존 제안서, 과거 인기 포스팅, 고객 FAQ, 리서치 노트를 검색하여 재활용하십시오. 이미 있는 자료를 처음부터 다시 쓰지 마십시오.
+*   **Pattern Consistency (브랜드 및 포맷 일관성)**: 기존에 검증된 브랜드 보이스, 문서 양식, 설득 구조를 일관되게 따르십시오.
+*   **Platform Standards (검증된 상용 도구 및 프레임워크 활용)**: 바닥부터 직접 다 만들려 하지 말고, 이미 검증된 프레임워크이나 상용 툴/템플릿을 적극 활용하십시오.
+*   **Identify Anti-Patterns (비즈니스 안티패턴 적발)**: 타겟 독자 정의 없는 무조건적 발행, CTA(행동 유도) 없는 마케팅 콘텐츠, 1인 운영자가 감당 불가능한 살인적 일정 등 전형적인 실패 패턴을 즉시 지적하십시오.

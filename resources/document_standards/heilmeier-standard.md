@@ -1,30 +1,20 @@
-# Heilmeier Catechism Standard
+# Heilmeier Catechism Standard (하일마이어 8대 비즈니스 검증 문답 표준)
 
-This standard defines the quality bar for project proposals based on the
-Heilmeier Catechism.
+이 표준은 신규 사업 기획서, 정부지원사업 계획서, 클라이언트 제안서, 또는 핵심 프로젝트 제안이 하일마이어 문답(Heilmeier Catechism)에 기반한 근본 질문들에 명확히 답하고 있는지 평가합니다.
 
-## Core Principle
+## Core Principle (핵심 원칙)
 
-A proposal passes if a competent engineer (or fresh AI session) who is
-unfamiliar with the project can understand the goals, risks, and value of the
-proposed work, and confirm that all catechism questions are answered without
-ambiguity.
+이 제안서는 **프로젝트 배경지식이 전혀 없는 심사위원, 투자자, 의사결정자, 또는 새로운 AI 세션**이 읽었을 때 제안의 목적, 차별점, 리스크, 비용, 기대 효과를 한 치의 모호함도 없이 이해하고 8대 질문 모두가 명확히 해결되었음을 확인할 수 있어야 통과됩니다.
 
-## Requirements (The Catechism Questions)
+## Requirements (The Catechism Questions / 8대 필수 질문)
 
-To satisfy this standard, the proposal must explicitly and clearly answer the
-following questions:
+이 표준을 충족하기 위해 제안서는 반드시 다음 8가지 질문에 명확하고 구체적으로 답해야 합니다:
 
-*   **Objectives**: What is being attempted? (Must be written with absolutely no
-    jargon).
-*   **State of the Art**: How is it done today, and what are the limits of
-    current practice?
-*   **New Approach**: What is new in the approach, and why is it expected to be
-    successful?
-*   **Impact**: Who cares? If successful, what difference will it make?
-*   **Risks**: What are the risks and the payoffs?
-*   **Cost**: How much will it cost in terms of resources, compute, or
-    headcount?
-*   **Timeline**: How long will it take?
-*   **Metrics & Exams**: What are the mid-term and final "exams" to check for
-    success?
+*   **Objectives (목표)**: 정확히 무엇을 하려는 것인가? (전문 용어나 추상적 은어 없이 누구나 이해할 수 있는 쉬운 말로 작성되어야 함).
+*   **State of the Art (현재 방식과 한계)**: 현재는 이 문제를 어떻게 해결하고 있으며, 기존 방식이나 경쟁 대안의 한계는 무엇인가?
+*   **New Approach (차별화된 해결책)**: 당신의 접근 방식이나 오퍼에서 무엇이 새로우며, 왜 이번에는 성공할 수 있다고 확신하는가?
+*   **Impact (누구에게 어떤 변화가 생기는가)**: 누가 이 결과물을 간절히 원하는가? 성공한다면 고객이나 비즈니스에 어떤 실질적 변화(Before & After)를 만들어내는가?
+*   **Risks (리스크와 보상)**: 예상되는 가장 큰 실패 위험은 무엇이며, 성공했을 때 얻는 보상은 그 위험을 감수할 만한가?
+*   **Cost (비용 및 투입 리소스)**: 예산, 시간, 또는 인력(1인 운영자의 에너지)이 얼마나 투입되어야 하는가?
+*   **Timeline (일정)**: 언제까지 무엇을 완료할 것인가?
+*   **Metrics & Exams (중간 점검 및 최종 성공 지표)**: 가는 길이 맞는지 확인할 중간 점검(Mid-term exam) 기준과 최종 성공을 판단할 지표(KPI)는 무엇인가?

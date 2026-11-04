@@ -1,62 +1,26 @@
-# FAQ
+# 자주 묻는 질문 (FAQ)
 
-#### Q: Are there alternatives?
+#### Q: 일반 ChatGPT나 Claude에 바로 시키는 것과 무엇이 다른가요?
 
-**A**: Yes. Many.
+**A**: 일반 채팅창에서 "제안서 써줘", "랜딩페이지 카피 써줘"라고 바로 시키면, AI는 당신이 가진 고유한 비즈니스 맥락을 모른 채 그럴싸하지만 알맹이 없는 상투적인 글을 써냅니다. 반대로 한 채팅창에서 맥락을 길게 설명한 뒤 글을 쓰게 하면, AI가 당신과 같은 '지식의 저주'에 빠져 정작 처음 보는 고객이나 심사위원에게는 이해되지 않는 불친절한 결과물을 만듭니다.
 
-EGM is one of the ways teams are making LLMs work better. It is not *the* way.
-There are others with different trade-offs. Regardless of the tool you choose,
-please remember: *You own the outcomes.*
+EGM-Biz는 **코끼리(깊은 맥락 인터뷰 & 설계)**와 **금붕어(사전 맥락 Zero 상태에서의 냉정한 독자 검증)**를 분리하여, 내 맥락은 100% 반영되면서도 처음 보는 타인에게 완벽히 전달되는 산출물을 만들어 줍니다.
 
-#### Q: What concrete artifacts does the EGM process produce?
+#### Q: EGM-Biz 워크플로우를 거치면 구체적으로 어떤 결과물(Artifacts)이 나오나요?
 
-**A**: EGM produces three core deliverables:
+**A**: 크게 4가지 핵심 자산이 남습니다:
 
-*   **Design Document**: A peer-reviewed technical specification that captures
-    intent, system invariants, and strategic direction.
-*   **Implementation checklist**: Identifies the files to create or modify,
-    the planned changes, and how to verify them.
-*   **Enriched Context Loops**: Colocated Markdown documentation (such as README
-    hierarchies) that provides high-quality context for future development
-    loops.
+1.  **기획 브리프 (`concepts_brief.md`)**: 아이디어의 핵심 가설, 타겟, In/Out 범위, 6대 금붕어의 초기 리스크 분석이 담긴 1페이지 요약서.
+2.  **마스터 기획서 (`docs/designs/<프로젝트명>.md`)**: 문제 정의, 핵심 설득 논리(Hook-Story-Offer), 기각한 대안들, 그리고 제작할 최종 산출물들의 세부 명세(`Detailed Implementation Plan`)가 담긴 설계도.
+3.  **실제 비즈니스 산출물 (`deliverables/` 등)**: 마스터 기획서가 금붕어 검증을 통과한 직후 제작되는 최종 결과물 — **사업기획서/제안서 본문, 랜딩페이지/상세페이지 카피 원고, 뉴스레터/콜드메일, 퍼스널 브랜딩 아티클(링크드인/스레드 등)**.
+4.  **비즈니스 맥락 지도 (`README.md` 계층 구조)**: `/egm-bootstrap`을 통해 내 업무 폴더의 기존 자료들을 요약해 둔 코끼리용 지식 베이스.
 
-#### Q: Will SWEs become obsolete under EGM?
+#### Q: 모든 업무에 매번 이 과정을 다 거쳐야 하나요? 시간이 오래 걸리지 않나요?
 
-**A**: In our opinion? No. However, code generation will be increasingly
-delegated to automated agents, shifting human engineering focus toward governing
-intent and reviewing architectural decisions captured in design documents.
+**A**: 아닙니다. 간단한 일상 이메일이나 가벼운 공지를 쓸 때는 그냥 바로 작성하세요.
 
-#### Q: Will the increased volume of design documentation create a human review bottleneck?
+하지만 **실패하면 비용과 시간이 크게 날아가는 중요한 일** — 예를 들어 정부지원사업 계획서, 고단가 B2B 제안서, 신규 상품 상세페이지 기획, 내 전문성을 각인시킬 핵심 퍼스널 브랜딩 시리즈 — 에서는 첫 단추(기획과 전달력 검증)를 제대로 꿰는 것이 결과적으로 수십 시간의 재작업을 아껴줍니다. 또한 급할 때는 전체 과정 대신 `/egm-review-loop`로 이미 쓴 초안에 금붕어 2~3마리만 붙여 빠르게 점검받을 수도 있습니다.
 
-**A**: It can. Reviewing designs adds work, and excessive documentation can
-become a bottleneck. The aim is to catch important problems before implementation;
-whether that saves time depends on the change and the quality of the review.
+#### Q: 금붕어가 지적한 사항을 전부 다 고쳐야 하나요?
 
-We recommend putting an emphasis on prioritization, at least for now. Use EGM
-for "What's important now?", instead of everything, to avoid overloading your
-reviewing and release pipelines.
-
-#### Q: Does this workflow degrade developer velocity?
-
-**A**: It depends. Design and review take time and may not pay off for a small,
-well-understood change. For uncertain or consequential changes, they may reduce
-rework by exposing missing decisions earlier.
-
-Compare total time, useful findings, and rework on your own tasks. Completing
-the EGM workflow alone does not demonstrate a productivity improvement.
-
-#### Q: Is expecting design documentation to be complete enough for a zero-context agent realistic?
-
-**A**: Sometimes, but not always. EGM's approach captures strategy and an
-execution plan, with Goldfish agents improving the quality, but LLMs are still
-non-deterministic.
-
-You need to use your judgment the same way you would for coaching a new software
-engineer. If it is making a minor mistake, adjust it. If it is wildly off base,
-maybe you need to go back to the drawing board and correct your design. This is
-part of the process and gets easier the more you use it.
-
-#### Q: Should I open big pull requests?
-
-**A**: No. Generally, the answer for this (and many other questions) is "The
-answer is the same as when you built things without AI."
+**A**: 절대 아닙니다. 금붕어들은 의도적으로 까다롭게 설정되어 있어 많은 지적을 쏟아냅니다. `/egm-resolve` 단계에서 코끼리가 타당한 수정안(`PROPOSE FIX`)과 금붕어의 오해(`CONTEST`)를 먼저 걸러주며, 비즈니스 오너인 당신은 도움이 되는 피드백만 취하고 나머지는 과감히 무시하면 됩니다.

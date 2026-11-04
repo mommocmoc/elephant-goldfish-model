@@ -1,6 +1,7 @@
-# [Feature/Project Name]
+# [프로젝트 / 캠페인 / 콘텐츠 제목]
 
-*   **Author:** [Author Name or GitHub Handle]
+*   **Author:** [작성자 이름 또는 브랜드 핸들]
+*   **Category:** [사업 기획서·제안서·PRD | 마케팅·세일즈 콘텐츠 | 퍼스널 브랜딩]
 *   **Status:** [Draft | Proposed | In Review | Approved]
 *   **Date:** [YYYY-MM-DD]
 
@@ -8,167 +9,134 @@
 
 ## Overview
 
-<!-- Provide a high-level summary of the feature, the business or technical
-problem it solves, and its context within the system. Keep it concise so both
-humans and agents can quickly parse the main objective.
--->
+<!-- 이 프로젝트, 캠페인, 또는 콘텐츠가 무엇인지, 누구를 위한 것인지, 어떤 핵심 가치를 제공하는지 3~5문장으로 명확하게 요약합니다. 코끼리(작성자)의 맥락을 전혀 모르는 금붕어(외부인/고객/협업자)가 이 섹션만 읽고도 한눈에 본질을 파악할 수 있어야 합니다. -->
 
 ## The Problem
 
-[Summarize the problem and the proposed solution here.]
+[타겟 고객/독자 또는 현재 비즈니스가 겪고 있는 구체적인 문제점(Pain Point)과 왜 지금 이 해결책이 필요한지 요약합니다.]
 
 ## Goals
 
 <!--
-What will this feature achieve? Be specific, measurable, and clear.
-These goals represent the absolute criteria for success.
+이 기획과 산출물을 통해 달성하고자 하는 구체적이고 측정 가능한 목표(KPI 또는 완료 기준)를 적습니다.
 -->
 
-*   Goal 1
-*   Goal 2
+*   목표 1 (예: 사전 예약 전환율 10% 달성 / 정부지원사업 서류 심사 통과 / 링크드인 리드 문의 5건 확보)
+*   목표 2
 
 ## Non-Goals
 
 <!--
-Explicitly state what is out of scope. This is crucial to prevent feature creep
-and to define strict boundaries for the implementation agent.
+리소스 집중(80/20)을 위해 이번 기획이나 산출물에서 의도적으로 제외하는 범위(하지 않을 일)를 명확히 선 긋습니다. 1인 사업가나 실무자가 과잉 기획에 빠지지 않도록 막아주는 핵심 안전장치입니다.
 -->
 
-*   Non-Goal 1
-*   Non-Goal 2
+*   비목표(제외 범위) 1
+*   비목표(제외 범위) 2
 
 ## Open Questions
 
 <!--
-List unresolved design questions, technical unknowns, or dependencies requiring
-investigation. Unanswered questions are retained here across drafting sessions
-to preserve conversational memory and prevent future sessions from re-asking
-questions that were already discussed. Remove answered questions as they are
-resolved.
+아직 확정되지 않은 의사결정 사항이나 추가로 확인해야 할 팩트/질문을 기록합니다. 해결된 질문은 지워 나갑니다.
 -->
 
-*   **Question 1**: [Description of technical unknown or open question]
-*   **Question 2**: [Description of technical unknown or open question]
+*   **Question 1**: [확인이 필요한 사항 또는 미결 질문]
 
 ## Critical User Journeys (CUJs)
 
 <!--
-Define the end-to-end user journeys this design enables. Each CUJ must contain:
-
-1. Given: Preconditions, starting state, and environment configurations.
-2. When: The trigger, user action, or system event.
-3. Then: The expected outcome, verification criteria, and postconditions.
+타겟 고객, 독자, 또는 의사결정자가 이 산출물을 접하고 최종 행동(구매, 승인, 구독, 문의)에 이르기까지의 핵심 여정(시나리오)을 정의합니다.
+1. Given (상황/전제): 타겟 독자가 처한 상황과 접점 채널
+2. When (행동/트리거): 산출물(제안서, 랜딩페이지, 포스팅)의 핵심 훅과 오퍼를 접했을 때
+3. Then (기대 결과): 독자가 얻는 확신과 구체적인 전환 행동(CTA)
 -->
 
-### CUJ 1: [Journey Title]
+### CUJ 1: [핵심 고객/독자 여정 제목]
 
-*   **Given**: [Preconditions]
-*   **When**: [Actions]
-*   **Then**: [Expected Outcomes]
+*   **Given**: [타겟 독자의 사전 상황 및 유입 맥락]
+*   **When**: [핵심 메시지/산출물을 접하고 행동하는 순간]
+*   **Then**: [기대되는 인식 변화 및 최종 전환 행동(CTA)]
 
-### CUJ 2: [Journey Title]
+### CUJ 2: [두 번째 여정 제목 (선택)]
 
-*   **Given**: [Preconditions]
-*   **When**: [Actions]
-*   **Then**: [Expected Outcomes]
+*   **Given**: [사전 상황]
+*   **When**: [행동]
+*   **Then**: [기대 결과]
 
 ## Technical Plan (Architecture)
 
-<!-- Detail the high-level design, architectural choices, system data flows, and
-component interactions. Include ASCII or Mermaid diagrams to clearly model the
-relationships.
--->
+<!-- 비즈니스 전략, 설득 논리 구조(Hook - Story - Offer), 채널 유통 흐름, 또는 서비스 운영 구조를 설계합니다. 텍스트 블록 다이어그램(ASCII 또는 Mermaid)으로 독자 여정이나 산출물 구조를 시각화하면 더욱 좋습니다. -->
 
-[Explain your architectural choices, data structures, and system component
-mapping here.]
+[핵심 메시지 설계, 섹션별 설득 논리, 오퍼 구성, 채널 배포 및 전환 구조를 여기에 구체적으로 기술합니다.]
 
 ```text
-[Optional ASCII Architecture Diagram]
+[선택: 고객 전환 퍼널 또는 문서 설득 구조 다이어그램]
 ```
 
 ## Alternatives Considered
 
-<!-- Document other architectural approaches or designs that were evaluated and
-rejected. Explain the pros, cons, and the technical reasoning for why the chosen
-plan is superior.
--->
+<!-- 브레인스토밍 과정에서 검토했으나 최종 기각한 다른 대안(다른 타겟, 다른 오퍼/가격, 다른 채널, 다른 메시지 앵글)들을 기록합니다. 왜 현재 선택한 방향이 더 나은지 명확한 비즈니스 근거를 남깁니다. -->
 
-### Alternative A: [Alternative Title]
+### Alternative A: [기각한 대안 제목]
 
-*   **Pros**: [List benefits]
-*   **Cons**: [List drawbacks]
-*   **Reason for Rejection**: [Why this option was not selected (e.g., "Rejected by author: technical rationale"). Do not attribute a rejection to a maintainer without linking their issue, discussion, or PR.]
+*   **Pros**: [장점]
+*   **Cons**: [단점 및 리소스/효과 한계]
+*   **Reason for Rejection**: [기각 사유 (예: "Rejected by author: 1인 운영 리소스 대비 전환 효율이 낮음"). 실제 출처 링크 없이 타인의 결정으로 돌리지 마십시오.]
 
 --------------------------------------------------------------------------------
 
 ## Non-Functional Requirements
 
-<!-- Analyze non-functional concerns only if they represent critical risks for
-this design:
-
-- Security & Privacy: (Data sensitivity, auth/auth, secrets management).
-- Performance & Latency: (Execution runtime, storage footprint, LLM token
-  overhead).
-- Rollout & Rollback: (Feature flags, backward compatibility, rollback
-  commands).
+<!-- 이 기획이나 산출물에서 특히 주의해야 할 현실적 제약 조건과 리스크 방어책을 적습니다:
+- Brand Tone & Manner (브랜드 보이스, 금칙어, 신뢰도 유지 기준)
+- Resource & Budget Limits (투입 가능한 최대 시간/예산 한도)
+- Legal / Policy / Risk Rollback (표시광고법/저작권 주의사항, 반응 저조 시 플랜B)
 -->
 
-[Detail any critical non-functional requirements here. If none are critical,
-this section can be omitted or stated as "None".]
+[핵심 제약 조건 및 리스크 대응 기준을 적습니다. 해당 사항이 없다면 "None"으로 표기합니다.]
 
 --------------------------------------------------------------------------------
 
 ### Additional Resources
 
-<!-- Specify the external resources and context that were used during the design
-discussion. Optional. If none were provided omit this section.-->
+<!-- 기획 및 제작에 참고한 기존 워크스페이스 문서, 브랜드 노트, 리서치 자료 링크를 걸어둡니다. -->
 
-*   Important project docs referenced
-*   Important docs/ referenced
-*   Related work
+*   참조한 기존 자산/문서 링크
 
 ### Future Improvements
 
-<!-- Specify areas that have room for future improvement here. If none were
-provided omit this section.-->
+<!-- 이번 범위(In-Scope)에는 넣지 않았지만, 추후 반응이 좋을 때 확장할 수 있는 후속 아이디어를 메모합니다. -->
 
-*   **The idea**: What could be improved?
+*   **확장 아이디어**: [향후 2차 캠페인, 리퍼포징, 자동화 등]
 
 --------------------------------------------------------------------------------
 
 ## Detailed Implementation Plan
 
-<!-- Specify exactly which files must be created or modified. Do not use vague
-language or TBDs.
+<!-- [가장 중요한 섹션]
+금붕어 검증이 끝난 직후 실제로 제작·출력해야 할 최종 비즈니스 산출물(Deliverables)의 파일 목록과 각 파일에 들어갈 세부 명세를 빈틈없이 정의합니다.
+제작자(또는 AI)가 추가 질문 없이 이 섹션만 보고 즉시 완벽한 최종 원고/문서를 뽑아낼 수 있어야 합니다.
 -->
 
 ### Target Files to Create/Modify
 
-#### 1. `[File Path 1]` ([Create | Modify])
+#### 1. `[산출물 파일 경로 1 (예: deliverables/business_proposal.md)]` ([Create | Modify])
 
-*   **Type / Scope**: [e.g., Python Service, C++ Library, TypeScript Module, Build
-    Configuration]
-*   **Proposed Changes**: [Describe the new APIs, class/function signatures, or
-    behavioral logic here. Focus on the minimal required details for
-    implementation.]
+*   **Type / Scope**: [예: 사업 기획서/제안서 본문 | 랜딩페이지 카피 원고 | 상세페이지 기획안 | 뉴스레터/콜드메일 | 링크드인 퍼스널 브랜딩 포스트]
+*   **Proposed Changes**: [이 산출물 파일에 반드시 포함되어야 할 정확한 섹션 목차, 핵심 헤드라인/카피 방향, 구체적 수치/사례/근거, 오퍼 조건, 최종 CTA 문구, 분량 및 톤앤매너를 임의 추측이 필요 없도록 구체적으로 명세합니다.]
 
-#### 2. `[File Path 2]` ([Create | Modify])
+#### 2. `[산출물 파일 경로 2 (예: deliverables/linkedin_launch_post.md)]` ([Create | Modify])
 
-*   **Type / Scope**: [e.g., Unit Test, E2E Test Driver]
-*   **Proposed Changes**: [Describe the test coverage, expected test cases, or
-    mock assertions.]
+*   **Type / Scope**: [예: 원소스 멀티유즈 홍보 포스트 / 요약본 / 실행 체크리스트]
+*   **Proposed Changes**: [각 섹션별 세부 작성 지침 및 핵심 포함 내용 명세]
 
 ### Verification Plan
 
-<!-- Specify what unit, integration, or manual tests must pass to validate the
-implementation. What metrics should be measured to verify success?
--->
+<!-- 완성된 최종 산출물이 기획 의도와 금붕어 검증 기준을 100% 충족했는지 확인하는 최종 품질 검수(QA) 체크리스트입니다. -->
 
-*   **Compilation/Build**: [e.g., `npm run build`, `cargo build`, `make`]
-*   **Unit Tests**: [e.g., `pytest`, `npm test`, `cargo test`]
-*   **Static Analysis & Linting**: [e.g., `eslint`, `ruff check`, `golangci-lint`]
-*   **Test Coverage Requirement**: [e.g., 85%+ branch coverage]
-*   **E2E/Integration**: [e.g., Integration test command or automated eval runner]
+*   **무맥락 독자(금붕어) 3초 이해도 테스트**: [사전 맥락 없는 타겟 고객/심사위원이 첫 문단만 읽고도 핵심 가치를 즉시 이해하는가?]
+*   **핵심 팩트 및 수치 일치 검증**: [기획서에 합의된 가격, 일정, 성과 수치, 핵심 근거가 누락이나 왜곡 없이 반영되었는가?]
+*   **톤앤매너 및 군더더기(Fluff) 제거 검수**: [추상적인 AI 상투어나 과장된 미사여구 없이 명확하고 설득력 있는 한국어로 작성되었는가?]
+*   **행동 유도(CTA) 및 전환 동선 확인**: [독자가 읽고 난 직후 무엇을 해야 하는지(신청, 구매, 문의, 댓글 등) 명확히 안내되어 있는가?]
 
 --------------------------------------------------------------------------------
 

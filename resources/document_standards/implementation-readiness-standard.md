@@ -1,37 +1,23 @@
-# Implementation Readiness Standard
+# Implementation Readiness Standard (실행 및 산출물 제작 준비도 표준)
 
-This standard defines the quality bar for implementation plans and task lists.
+이 표준은 기획서의 하단 파트인 **상세 실행 계획 및 산출물 제작 명세(Detailed Implementation Plan)**가 실제 제작(또는 외주/AI 위임)에 즉시 투입될 수 있는지 평가하는 품질 기준을 정의합니다.
 
-## Core Principle
+## Core Principle (핵심 원칙)
 
-A plan passes if a competent engineer (or fresh AI session) who is unfamiliar
-with the codebase can execute the plan and produce the correct changes on the
-first attempt, without guessing, asking clarifying questions, or making
-independent design choices.
+이 계획서는 **사전 대화를 전혀 모르는 실무 담당자, 외주 작업자, 또는 새로운 AI 세션**이 이 문서만 보고도 단 한 번의 추가 질문이나 추측, 임의의 의사결정 없이 **첫 시도에 의도한 그대로의 완벽한 비즈니스 산출물을 제작하거나 실행**할 수 있어야 통과됩니다.
 
-## The Zero-Decision Rule
+## The Zero-Decision Rule (임의 결정 제로의 원칙 - 필수)
 
-The plan must leave **zero design or architectural choices to the implementer**.
-If the implementer must make design choices (including, but not limited to,
-choosing a database schema, designing an API path, selecting a dependency, or
-deciding how to handle a new edge case), the plan **fails** this standard. All
-such decisions must be pre-determined and documented in the plan.
+실행 및 제작 계획은 **실제 제작자(또는 산출물 생성 AI)에게 중요한 기획적 결정을 떠넘겨서는 안 됩니다(Zero Design/Strategic Decisions Left to Implementer).** 만약 제작자가 산출물을 만들면서 핵심 타겟의 페르소나를 추측해야 하거나, 가격/할인 조건을 임의로 정해야 하거나, 핵심 헤드라인 메시지 앵글이나 CTA(행동 유도) 방식을 스스로 고민해서 결정해야 한다면 이 계획서는 **불합격(Blocker)**입니다. 모든 핵심 결정 사항은 계획서에 미리 확정되어 문서화되어 있어야 합니다.
 
-## Phasing & Checkpoints
+## Phasing & Checkpoints (단계별 실행 및 중간 점검)
 
-The plan must partition the work into logical, incremental phases. Each phase
-must leave the codebase in a stable, buildable, and testable state.
+실행 계획은 논리적이고 순차적인 단계로 나누어져야 합니다. 각 단계가 끝날 때마다 결과물이 기준을 충족하는지 확인할 수 있는 명확한 상태와 검수 기준이 있어야 합니다.
 
-## Requirements (Non-Exhaustive Examples)
+## Requirements (필수 포함 항목)
 
-The plan must detail these areas if applicable to the proposed changes:
+상세 실행 및 산출물 제작 계획은 다음 항목을 반드시 구체적으로 명시해야 합니다:
 
-*   **Target Scope & File Boundary**: Explicit list of exact repository-relative
-    file paths to be created, modified, or deleted, suitable for enforcing a
-    Phase 5 write allowlist without unapproved adjacent refactors or
-    opportunistic dependency additions. Use a directory glob only for generated
-    output whose filenames can't be known in advance.
-*   **Actionable Steps**: Precise logic changes, data transformations, and API
-    updates for each file.
-*   **Test Plan**: Specific test cases (happy path and edge cases) that must be
-    implemented.
+*   **Target Scope & File Boundary**: 생성(Create), 수정(Modify), 또는 삭제(Delete)할 정확한 repository-relative 산출물 파일 경로 목록. Phase 5 write allowlist를 강제할 수 있도록 승인되지 않은 주변 파일 수정이나 임의의 작업 추가를 엄격히 차단해야 합니다. 파일명을 미리 알 수 없는 대량 생성 결과물에 한해서만 디렉토리 글로브(glob)를 허용합니다.
+*   **Actionable Steps (구체적 제작 지침 및 섹션별 명세)**: 각 산출물 파일에 들어가야 할 정확한 목차/섹션 구조, 핵심 카피/메시지 팩트, 필수 포함 수치 및 사례, 톤앤매너, 분량 기준.
+*   **Test Plan (산출물 품질 검수 체크리스트)**: 완성된 산출물이 목적에 부합하는지 검증할 구체적인 체크리스트(무맥락 독자 이해도 통과 여부, 필수 정보/CTA 포함 여부, 오탈자 및 금칙어 검수 등).
