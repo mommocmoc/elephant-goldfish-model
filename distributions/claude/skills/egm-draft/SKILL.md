@@ -113,8 +113,8 @@ In Claude Code or Cowork, read `${CLAUDE_PLUGIN_ROOT}/docs/claude.md` first.
 금붕어 검증이 끝난 직후 **추가 질문 없이 곧바로 최종 비즈니스 산출물(제안서 본문, 랜딩페이지 카피, 상세페이지 기획안, 링크드인/뉴스레터 원고 등)을 100% 완성할 수 있을 만큼** 구체적인 상세 제작 명세(`## Detailed Implementation Plan`)를 작성합니다:
 
 1.  **Single Implementation List**: 만들어야 할 모든 최종 산출물과 실행 과제를 하나의 통합된 섹션(`## Detailed Implementation Plan`) 아래에 정리합니다.
-2.  **Enumerate Files (모든 산출물 파일 명시)**: 새로 생성(`Create`), 수정(`Modify`), 또는 삭제(`Delete`)할 **모든 최종 산출물 파일 경로**(예: `deliverables/proposal_final.md`, `deliverables/landing_page_copy.md`, `deliverables/linkedin_post_01.md`)와 함께 업데이트해야 할 관련 문서나 템플릿을 빠짐없이 나열하십시오.
-3.  **Rationale & Section-by-Section Blueprint**: 각 산출물 파일마다 *무엇을* 작성/수정하며 *왜* 필요한지, 그리고 **해당 산출물 안에 들어갈 세부 목차, 핵심 카피/헤드라인, 포함할 구체적 수치·사례, 오퍼 조건, CTA 문구**를 빈틈없이 명세하십시오.
+2.  **Enumerate Files (국문/영문 등 모든 산출물 파일 명시)**: 타겟 시장(`KR` / `Global` / `Both`)에 맞춰 새로 생성(`Create`), 수정(`Modify`), 또는 삭제(`Delete`)할 **모든 최종 산출물 파일 경로**(예: `deliverables/kr_proposal.md`, `deliverables/en_global_pitch.md`, `deliverables/kr_landing_copy.md`, `deliverables/en_landing_copy.md`, `deliverables/en_linkedin_post.md`)와 함께 업데이트해야 할 관련 문서나 템플릿을 빠짐없이 나열하십시오.
+3.  **Rationale & Localized Section-by-Section Blueprint**: 각 산출물 파일마다 *무엇을* 작성/수정하며 *왜* 필요한지, 그리고 **해당 산출물 안에 들어갈 세부 목차, 시장별 현지화된 핵심 카피/헤드라인(국문 및/또는 Native English), 포함할 구체적 수치·사례, 오퍼 조건(KRW/USD), CTA 문구**를 단순 직역이 되지 않도록 빈틈없이 명세하십시오.
 4.  **Format Links**: 알려진 전체 상대 경로(예: `./deliverables/proposal.md` 또는 `../brand/guide.md`)로 명확히 표기하십시오.
 5.  **NO FINAL DELIVERABLE GENERATION YET (NO CODE)**: 이 기획서 초안 단계에서는 아직 실제 최종 산출물 파일을 별도로 생성하지 마십시오. 산출물의 구조, 목차, 핵심 카피 설계, 스키마는 `design_draft.md` 안에 명세합니다.
 6.  **Update Draft Artifact (MANDATORY)**: `design_draft.md`에 "Detailed Implementation Plan" 섹션을 추가합니다.
