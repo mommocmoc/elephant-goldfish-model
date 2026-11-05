@@ -72,7 +72,7 @@ In Claude Code or Cowork, read `${CLAUDE_PLUGIN_ROOT}/docs/claude.md` first.
 
 ### Step 1: Ingest Predecessor Context (이전 브레인스토밍 맥락 불러오기)
 
-1.  **Context File**: `Context File`이 지정되었다면 즉시 읽고 파싱합니다.
+1.  **Context File**: `Context File`이 지정되었다면 즉시 읽고 파싱합니다. (선택적 애드온 연동: 작업 디렉토리에 `intellectual_signature.md` 또는 `brand_worldview_bridge.md`가 존재한다면 보조 컨텍스트로 함께 읽어 작성자의 브랜드 세계관과 고유 어휘를 유지합니다.)
 2.  **Polymorphic Intake**: 지정되지 않았다면 아래 우선순위로 컨텍스트를 자동 탐색합니다:
     *   **Priority 1: Modern Ideation Brief (`concepts_brief.md`)**: `./concepts_brief.md`, 대화 아티팩트 디렉토리, 또는 `scratch/concepts_brief.md`를 확인하여 있으면 읽어 들입니다.
     *   **Priority 2: Discussion Summary (`discussion_summary.md`)**: `concepts_brief.md`가 없으면 `./discussion_summary.md`, 아티팩트 디렉토리, 또는 `scratch/discussion_summary.md`를 확인합니다. 있을 경우 `/egm-brainstorm`을 다시 실행하라고 강요하지 말고 그대로 사용합니다.

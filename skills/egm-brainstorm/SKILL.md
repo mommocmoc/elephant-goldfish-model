@@ -52,7 +52,7 @@ In Claude Code or Cowork, read `${CLAUDE_PLUGIN_ROOT}/docs/claude.md` first.
 
 ### Step 1: Deep Clarification & Problem Statement Drilling (코끼리 심층 맥락 인터뷰)
 
-1.  **Check for Concept Foundation & Author Identity**: 사용자가 초기 아이디어(기획안, 마케팅 캠페인, 퍼스널 브랜딩 주제 등)를 제시했는지 확인하십시오. 없다면 어떤 업무나 아이디어를 기획하고 싶은지 편하게 설명해 달라고 요청하십시오. 작성자(`Author`) 이름은 `git config user.name` → `GIT_AUTHOR_NAME` 순으로 확인하고, 둘 다 설정되어 있지 않으면 채팅으로 작성자 이름(또는 브랜드명/핸들)을 물어보십시오.
+1.  **Check for Concept Foundation & Author Identity**: 사용자가 초기 아이디어(기획안, 마케팅 캠페인, 퍼스널 브랜딩 주제 등)를 제시했는지 확인하십시오. 없다면 어떤 업무나 아이디어를 기획하고 싶은지 편하게 설명해 달라고 요청하십시오. 작성자(`Author`) 이름은 `git config user.name` → `GIT_AUTHOR_NAME` 순으로 확인하고, 둘 다 설정되어 있지 않으면 채팅으로 작성자 이름(또는 브랜드명/핸들)을 물어보십시오. (선택적 애드온 연동: 만약 작업 디렉토리에 `/egm-creative-team`으로 생성된 `intellectual_signature.md` 또는 `content_map.md`가 존재한다면, 이를 함께 읽어 작성자의 고유 렌즈·세계관·지적 서명을 반영하십시오.)
 2.  **Iterative Problem Drilling (Multi-Turn Chat)**: 한 번의 답변만 듣고 성급하게 서브에이전트를 호출하지 마십시오. 문제 정의, 타겟 독자/고객, 현실적 제약 조건, 최종적으로 필요한 산출물이 명확해질 때까지 여러 턴에 걸쳐 **한 번에 하나씩 열린 질문**을 던지십시오. 이 단계에서는 절대 `ask_question` 도구나 객관식 보기를 사용하지 말고 일반 채팅으로 질문하십시오:
 
     *   *이 기획(또는 콘텐츠/제안서)을 통해 해결하려는 가장 핵심적인 문제나 목표는 무엇인가요?*

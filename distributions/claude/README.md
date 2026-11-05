@@ -141,6 +141,7 @@ AI 에이전트에서 작업 폴더를 열고 기획하거나 제작하고 싶�
     <tr valign="top"><td width="160" valign="top"><img src="skills/egm-review-loop/assets/icon.svg" width="20" height="20" alt="" align="top">&nbsp;<a href="skills/egm-review-loop/SKILL.md">Review&nbsp;loop</a></td><td>완성된 제안서나 카피 원고에 대해 원하는 금붕어 조합(예: 무맥락 이해도 + 카피 에디터)만 골라 집중 점검합니다.</td></tr>
     <tr valign="top"><td width="160" valign="top"><img src="skills/egm-bootstrap/assets/icon.svg" width="20" height="20" alt="" align="top">&nbsp;<a href="skills/egm-bootstrap/SKILL.md">Bootstrap</a></td><td>내 업무 폴더에 쌓인 기존 기획안·원고·노트를 탐색해 코끼리가 즉시 이해할 수 있는 비즈니스 맥락 지도(<code>README.md</code>)를 구축합니다.</td></tr>
     <tr valign="top"><td width="160" valign="top"><img src="skills/egm-drift-report/assets/icon.svg" width="20" height="20" alt="" align="top">&nbsp;<a href="skills/egm-drift-report/SKILL.md">Drift&nbsp;report</a></td><td>마스터 기획서의 의도·수치·핵심 메시지가 실제 제작된 산출물에서 누락되거나 왜곡되지 않았는지 대조합니다.</td></tr>
+    <tr valign="top"><td width="160" valign="top"><img src="skills/egm-creative-team/assets/icon.svg" width="20" height="20" alt="" align="top">&nbsp;<a href="skills/egm-creative-team/SKILL.md">Creative&nbsp;team</a></td><td><strong>[Dan Koe Add-on]</strong> 지적 서명(8대 인터뷰), 6개월 콘텐츠 맵, 무허가 견습생 수주 팩, 그리고 메이킹 프로젝트(Build in Public) 세계관 연결을 수행합니다.</td></tr>
   </tbody>
 </table>
 

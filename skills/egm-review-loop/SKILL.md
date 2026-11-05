@@ -46,7 +46,7 @@ In Claude Code or Cowork, read `${CLAUDE_PLUGIN_ROOT}/docs/claude.md` first.
     *   `codebase_details` (`egm-codebase-details`): 팩트·수치·기존 자산 정합성 금붕어 → `agents/codebase_details.md`
     *   `structural` (`egm-structural`): 논리 구조·가독성 아키텍트 금붕어 → `agents/structural.md`
     *   `style` (`egm-style`): 비즈니스 카피·설득력 에디터 금붕어 → `agents/style.md`
-*   **Standard Shortnames**: `feature-spec-standard`, `implementation-readiness-standard`, `zoom-out-standard`, `heilmeier-standard`, `re-implementation-standard` → `resources/document_standards/{name}.md`.
+*   **Standard Shortnames**: `feature-spec-standard`, `implementation-readiness-standard`, `zoom-out-standard`, `heilmeier-standard`, `re-implementation-standard`, `world-of-content-standard` → `resources/document_standards/{name}.md`.
 *   **Custom Paths**: 슬래시(`/`)가 포함된 경우 직접 파일 경로로 읽습니다.
 
 ## Execution Workflow
@@ -62,7 +62,7 @@ In Claude Code or Cowork, read `${CLAUDE_PLUGIN_ROOT}/docs/claude.md` first.
 3.  **Reviewer Recommendations (문서 성격별 추천 금붕어 조합)**:
     *   *상위 사업 기획서 / 제안서 / 캠페인 전략*: `design_critic` (`resources/document_standards/feature-spec-standard.md`), `structural` (`resources/document_standards/feature-spec-standard.md`), `comprehension`, `style` 추천.
     *   *상세 산출물 제작 명세 / 실행 계획 / 외주 지시서*: `implementation_readiness` (`resources/document_standards/implementation-readiness-standard.md`), `codebase_details`, `style` 추천.
-    *   *완성된 마케팅 카피 / 퍼스널 브랜딩 원고 단건 점검*: `comprehension` (무맥락 3초 이해도), `style` (카피 설득력 및 미사여구 제거), `codebase_details` (팩트 정합성) 추천.
+    *   *완성된 마케팅 카피 / 퍼스널 브랜딩 원고 단건 점검*: `comprehension` (무맥락 3초 이해도), `style` (`resources/document_standards/world-of-content-standard.md` — 카피 설득력, Anti-Slop 및 지적 서명 반영 검수), `codebase_details` (팩트 정합성) 추천.
 4.  **Confirm Configuration**: 검증 대상, 투입할 금붕어 목록, 적용할 표준을 보여주고 사용자 확인 후 시작합니다.
 
 ### Step 2: The Sharpening Loop (반복 벼리기 사이클)
