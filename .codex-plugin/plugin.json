@@ -6,7 +6,7 @@
     "name": "Google"
   },
   "homepage": "https://egm.dev",
-  "repository": "https://github.com/google/elephant-goldfish-model",
+  "repository": "https://github.com/mommocmoc/elephant-goldfish-model",
   "license": "Apache-2.0",
   "skills": "./skills/",
   "requires_local_executor": true,

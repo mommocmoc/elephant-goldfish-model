@@ -41,41 +41,50 @@ EGM-Biz는 역할을 엄격히 분리하여 이 문제를 해결합니다:
 
 ---
 
-## Install
+## Install (내 비즈니스 포크 버전 설치 및 적용 방법)
 
-사용 중인 AI 에이전트(Antigravity, Claude Code, Codex 등)에 플러그인 전체를 설치하세요.
+이 저장소(`https://github.com/mommocmoc/elephant-goldfish-model`)는 Google 원본이 아닌 **글로벌(EN)·한국(KR) 비즈니스 및 1인 크리에이터/메이커용 커스텀 버전(`EGM-Biz`)**입니다.
+반드시 아래 명령어로 **`mommocmoc/elephant-goldfish-model` 저장소** 또는 로컬 클론 폴더를 설치해야 한국어/글로벌 비즈니스 스킬과 `egm-creative-team`(Dan Koe & 메이커 세계관 스킬)이 작동합니다.
 
-### Antigravity CLI & App
+### 1. Antigravity App / Antigravity for IDEs / Antigravity CLI
+
+#### 방법 A: 원격 GitHub 저장소에서 바로 설치 (가장 간편)
+- **Antigravity App / IDE 채팅창에서:** `/plugin` 입력 또는 에이전트에게 `Install https://github.com/mommocmoc/elephant-goldfish-model` 요청
+- **Antigravity CLI (`agy`)에서:**
+  ```sh
+  agy plugin install https://github.com/mommocmoc/elephant-goldfish-model
+  ```
+
+#### 방법 B: 로컬 포크 폴더에서 직접 설치 및 업데이트 (권장 — 커스텀 수정 즉시 반영)
+Antigravity는 `~/.gemini/config/plugins/egm/` 경로에서 플러그인을 로드합니다. 기존 원본 플러그인이 깔려 있다면 지우고 내 비즈니스 버전으로 덮어쓰세요:
 
 ```sh
-# 글로벌 플러그인 디렉토리에 바로 설치 (로컬 포크/클론 폴더 기준)
+# 1. 내 비즈니스 포크 저장소 클론 (이미 클론했다면 해당 폴더로 이동)
+git clone https://github.com/mommocmoc/elephant-goldfish-model.git
+cd elephant-goldfish-model
+
+# 2. 기존 플러그인 폴더 초기화 후 내 비즈니스 버전 복사
+rm -rf ~/.gemini/config/plugins/egm
 mkdir -p ~/.gemini/config/plugins/egm
 cp -R plugin.json README.md LICENSE skills agents resources docs assets ~/.gemini/config/plugins/egm/
 ```
+> 설치 후 Antigravity 창을 새로고침(Reload Window)하거나 새 세션을 시작하면 즉시 반영됩니다.
 
-또는 원격 저장소에서 설치할 경우:
-
-```sh
-agy plugin install https://github.com/google/elephant-goldfish-model
-```
-
-**Antigravity App** 및 **Antigravity for IDEs**(VS Code 확장)에서는 `/plugin`을 실행하거나 [설치 안내](docs/harnesses.md#antigravity-app-and-antigravity-for-ides)를 참고하세요.
-
-### Claude Code
+### 2. Claude Code
 
 ```sh
-claude plugin marketplace add google/elephant-goldfish-model
+claude plugin marketplace add mommocmoc/elephant-goldfish-model
 claude plugin install egm@egm
 ```
 
-### Codex
+### 3. Codex
 
 ```sh
-codex plugin marketplace add google/elephant-goldfish-model
+codex plugin marketplace add mommocmoc/elephant-goldfish-model
 codex plugin add egm@egm
 ```
 
-설치 후 새로운 세션을 시작하세요. **Claude Cowork** 및 **ChatGPT Work** 설정은 [설치 가이드](docs/harnesses.md)를 참고하세요.
+설치 후 새로운 세션을 시작하세요. 상세 환경 설정은 [설치 가이드](docs/harnesses.md)를 참고하세요.
 
 ---
 
